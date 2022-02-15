@@ -1,0 +1,44 @@
+CREATE DATABASE flights_platform;
+USE flights_platform;
+
+CREATE TABLE users (
+	userID INT NOT NULL AUTO_INCREMENT,
+    fName VARCHAR(50),
+    lName VARCHAR(50),
+    phone VARCHAR(30),
+    email VARCHAR(60),
+    age INT,
+    passw VARCHAR(20),
+    PRIMARY KEY (userID)
+);
+
+CREATE TABLE admins (
+	adminID INT NOT NULL AUTO_INCREMENT,
+    fName VARCHAR(50),
+    lName VARCHAR(50),
+    phone VARCHAR(30),
+    email VARCHAR(60),
+    age INT,
+    passw VARCHAR(20),
+    PRIMARY KEY (adminID)
+);
+
+CREATE TABLE vols (
+	volID INT NOT NULL AUTO_INCREMENT,
+    departureDate TIMESTAMP,
+    departureAdress VARCHAR(100),
+    destinationAdress VARCHAR(100),
+    arrivalDate TIMESTAMP,
+    price FLOAT,
+	PRIMARY KEY (volID)
+);
+
+CREATE TABLE reservs (
+	reservID INT NOT NULL AUTO_INCREMENT,
+    volID INT,
+    dateReserv TIMESTAMP,
+    state VARCHAR(20)
+    PRIMARY KEY (reservID),
+    FOREIGN KEY 
+);
+
