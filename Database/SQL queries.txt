@@ -1,44 +1,74 @@
 CREATE DATABASE flights_platform;
 USE flights_platform;
+SET SQL_MODE='ALLOW_INVALID_DATES';
+CREATE TABLE users (
+	userID INT NOT NULL AUTO_INCREMENT,
+    fName VARCHAR(50),
+    lName VARCHAR(50),
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(60) NOT NULL,
+    age INT,
+    passw VARCHAR(20) NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (userID)
+);
+
+CREATE DATABASE flights_platform;
+USE flights_platform;
 
 CREATE TABLE users (
 	userID INT NOT NULL AUTO_INCREMENT,
     fName VARCHAR(50),
     lName VARCHAR(50),
-    phone VARCHAR(30),
-    email VARCHAR(60),
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(60) NOT NULL,
     age INT,
-    passw VARCHAR(20),
+    passw VARCHAR(20) NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (userID)
 );
 
 CREATE TABLE admins (
 	adminID INT NOT NULL AUTO_INCREMENT,
+    privilege VARCHAR(20) NOT NULL,
     fName VARCHAR(50),
     lName VARCHAR(50),
-    phone VARCHAR(30),
-    email VARCHAR(60),
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(60) NOT NULL,
     age INT,
-    passw VARCHAR(20),
+    passw VARCHAR(20) NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (adminID)
 );
 
+CREATE TABLE planes (
+	planeID INT NOT NULL AUTO_INCREMENT,
+    model VARCHAR(50),
+    seats INT NOT NULL,
+    PRIMARY KEY(planeID)
+);
 CREATE TABLE vols (
 	volID INT NOT NULL AUTO_INCREMENT,
-    departureDate TIMESTAMP,
-    departureAdress VARCHAR(100),
-    destinationAdress VARCHAR(100),
-    arrivalDate TIMESTAMP,
+    planeID INT,
+    departureDate TIMESTAMP NOT NULL,
+    departureAdress VARCHAR(100) NOT NULL,
+    destinationAdress VARCHAR(100) NOT NULL,
+    arrivalDate TIMESTAMP DEFAULT NULL,
+    availableSeats INT NOT NULL,
     price FLOAT,
-	PRIMARY KEY (volID)
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (volID),
+    FOREIGN KEY (planeID) REFERENCES planes(planeID)
 );
 
 CREATE TABLE reservs (
 	reservID INT NOT NULL AUTO_INCREMENT,
     volID INT,
-    dateReserv TIMESTAMP,
-    state VARCHAR(20)
+    userID INT,
+    dateReserv TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    state VARCHAR(20),
     PRIMARY KEY (reservID),
-    FOREIGN KEY 
+    FOREIGN KEY (volID) REFERENCES vols(volID),
+    FOREIGN KEY (userID) REFERENCES users(userID)
 );
 
