@@ -12,6 +12,6 @@
         public function getAdmin(){
 
         }
-
+    }
 
 ?>
