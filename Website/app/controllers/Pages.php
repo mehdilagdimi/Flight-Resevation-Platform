@@ -14,6 +14,9 @@
             $this->view('pages/index', $data);
         }
 
+        public function flights(){
+            //display flights page
+        }
         public function contact(){
             // echo 'contact page';
             $this->view('pages/contact');
