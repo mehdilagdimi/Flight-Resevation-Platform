@@ -6,7 +6,7 @@
 
    RewriteEngine on
 
-    RewriteBase /mvcExample2/public
+    RewriteBase '/Flight Reservation Platform/Website/public'
    # Send request via index.php
     
    RewriteCond %{REQUEST_FILENAME} !-f

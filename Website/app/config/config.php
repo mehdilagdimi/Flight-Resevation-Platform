@@ -3,7 +3,7 @@
     define ('DB_HOST', 'localhost');
     define ('DB_USER', 'root');
     define ('DB_PASS', '');
-    define ('DB_NAME', 'mvc_frmwork_test');
+    define ('DB_NAME', 'flights_platform');
     define('DB_PORT', '4000');
 
     // echo __FILE__ . "<br>" ;
@@ -11,9 +11,9 @@
     //app root
     define('APPROOT', dirname(dirname(__FILE__)));
     //url root
-    define('URLROOT', 'localhost/mvcExample2/');
+    define('URLROOT', 'localhost/Flight Reservation Platform/Website');
 
     //sitename
-    define('SITENAME', 'ARID');
+    define('SITENAME', 'Flight Reservation Platform');
 
 ?>

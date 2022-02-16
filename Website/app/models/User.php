@@ -1,15 +1,19 @@
 <?php
-    class User {
-        private $db;
-
+    class User extends Model{
+        // private $db;
+        
+        // public function __construct(){
+        //     $this->db = new Database;
+        // }
+        //specify which DB table
         public function __construct(){
-            $this->db = new Database;
+            $this->table = 'users';
         }
 
         public function getUsers(){
-            $this->db->query("SELECT * FROM users");
-            $result = $this->db->resultSet();
-            return $result;
+            // $this->db->query("SELECT * FROM users");
+            // $result = $this->db->resultSet();
+            return $this->getTable();
         }
     }
 ?> 

@@ -3,4 +3,5 @@
     echo APPROOT;   
     echo "<br>" . URLROOT;
     echo '<br>'. SITENAME;
+    echo "<br>" .  __FILE__;
 ?>
