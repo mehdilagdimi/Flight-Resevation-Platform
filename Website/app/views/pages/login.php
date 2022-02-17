@@ -1,12 +1,5 @@
-//this page is the home page showing reservation,  reservations need loging in
 <?php
-    //APPROOT is a contant defined in config.php file
-    // echo APPROOT;   
-    // echo "<br>" . URLROOT;
-    // echo '<br>'. SITENAME;
-    // echo "<br>" .  __FILE__;
 
-    // header('location : home.php');
 ?>
 
 <html>

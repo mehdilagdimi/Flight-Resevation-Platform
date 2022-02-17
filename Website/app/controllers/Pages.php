@@ -11,7 +11,11 @@
                 'name' => 'ARID'
             ];
 
-            $this->view('pages/index', $data);
+            // $this->view('pages/index', $data);
+            $this->view('pages/index');
+        }
+        public function home(){
+            $this->view('pages/home');
         }
 
         public function flights(){

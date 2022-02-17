@@ -17,12 +17,13 @@
                 'title' => 'List of admins',
                 'admins' => $admins
             ];
+            
         }
 
         public function showUsers(){
             $users = $this->userModel->getUsers();
             $data = [
-                'title' => 'Users Page',
+                'title' => 'List of registered users',
                 'users' => $users
             ];
             $this->view('users/showUsers', $data);

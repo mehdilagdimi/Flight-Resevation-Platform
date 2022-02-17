@@ -1,21 +1,6 @@
-CREATE DATABASE flights_platform;
-USE flights_platform;
 SET SQL_MODE='ALLOW_INVALID_DATES';
-CREATE TABLE users (
-	userID INT NOT NULL AUTO_INCREMENT,
-    fName VARCHAR(50),
-    lName VARCHAR(50),
-    phone VARCHAR(30) NOT NULL,
-    email VARCHAR(60) NOT NULL,
-    age INT,
-    passw VARCHAR(20) NOT NULL,
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (userID)
-);
-
 CREATE DATABASE flights_platform;
 USE flights_platform;
-
 CREATE TABLE users (
 	userID INT NOT NULL AUTO_INCREMENT,
     fName VARCHAR(50),
@@ -27,6 +12,7 @@ CREATE TABLE users (
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (userID)
 );
+
 
 CREATE TABLE admins (
 	adminID INT NOT NULL AUTO_INCREMENT,
@@ -53,10 +39,11 @@ CREATE TABLE vols (
     departureDate TIMESTAMP NOT NULL,
     departureAdress VARCHAR(100) NOT NULL,
     destinationAdress VARCHAR(100) NOT NULL,
-    arrivalDate TIMESTAMP DEFAULT NULL,
+    arrivalDate TIMESTAMP NOT NULL,
     availableSeats INT NOT NULL,
     price FLOAT,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    state VARCHAR(20),
 	PRIMARY KEY (volID),
     FOREIGN KEY (planeID) REFERENCES planes(planeID)
 );
@@ -66,9 +53,8 @@ CREATE TABLE reservs (
     volID INT,
     userID INT,
     dateReserv TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-    state VARCHAR(20),
     PRIMARY KEY (reservID),
-    FOREIGN KEY (volID) REFERENCES vols(volID),
+    FOREIGN KEY (volID) REFERENCES vols(volID) ON DELETE CASCADE,
     FOREIGN KEY (userID) REFERENCES users(userID)
 );
 

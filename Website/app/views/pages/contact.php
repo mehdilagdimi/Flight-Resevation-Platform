@@ -1,1 +1,3 @@
-Testing contact page 
+<?php
+//this is contact page Testing contact page 
+?>
