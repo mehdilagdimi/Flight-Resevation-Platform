@@ -11,6 +11,12 @@
 
         public function showReservations(){
             //display reservations
+
+            $resers = $this->reservModel->getReservs();
+            $data = [
+                'title' => 'List of reservations',
+                'reservations' => $reservs 
+            ];
         }
     }
 ?>

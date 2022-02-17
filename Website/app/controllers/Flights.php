@@ -11,13 +11,14 @@
 
         public function showFlights(){
             //Display flights
-            $flights = $this->flightModel->getFlight();
+            $flights = $this->flightModel->getFlights();
             $data = [
                 'title' => 'List of flights',
                 'flights' => $flights
             ];
             
             $this->view('pages/index', $data);
+            $this->view('dashboard/index', $data);
         }
-    }
+    } 
 ?>

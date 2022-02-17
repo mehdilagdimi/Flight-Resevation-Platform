@@ -15,5 +15,9 @@
             // $result = $this->db->resultSet();
             return $this->getTable();
         }
+
+        public function setUsers(){
+            
+        }
     }
 ?> 

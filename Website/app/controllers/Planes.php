@@ -11,6 +11,13 @@
 
         public function showPlanes(){
             //display planes
+            $planes = $this->planeModel->getPlanes();
+            $data = [
+                'title' => "List of planes",
+                'planes' => $planes
+            ];
+
+            $this->view('dashboard/showPlanes', $data); 
         }
     }
 

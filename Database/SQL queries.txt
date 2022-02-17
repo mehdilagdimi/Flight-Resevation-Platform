@@ -53,8 +53,9 @@ CREATE TABLE reservs (
     volID INT,
     userID INT,
     dateReserv TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    goingComing VARCHAR(20) NOT NULL DEFAULT 'Going',
+    seatNum INT,
     PRIMARY KEY (reservID),
     FOREIGN KEY (volID) REFERENCES vols(volID) ON DELETE CASCADE,
     FOREIGN KEY (userID) REFERENCES users(userID)
 );
-

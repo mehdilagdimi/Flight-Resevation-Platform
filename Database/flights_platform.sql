@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2022 at 03:02 PM
+-- Generation Time: Feb 17, 2022 at 03:13 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -62,7 +62,8 @@ CREATE TABLE `reservs` (
   `volID` int(11) DEFAULT NULL,
   `userID` int(11) DEFAULT NULL,
   `dateReserv` timestamp NOT NULL DEFAULT current_timestamp(),
-  `state` varchar(20) DEFAULT NULL
+  `goingComing` varchar(20) NOT NULL DEFAULT 'Going',
+  `seatNum` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -97,7 +98,8 @@ CREATE TABLE `vols` (
   `arrivalDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `availableSeats` int(11) NOT NULL,
   `price` float DEFAULT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `state` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -179,7 +181,7 @@ ALTER TABLE `vols`
 -- Constraints for table `reservs`
 --
 ALTER TABLE `reservs`
-  ADD CONSTRAINT `reservs_ibfk_1` FOREIGN KEY (`volID`) REFERENCES `vols` (`volID`),
+  ADD CONSTRAINT `reservs_ibfk_1` FOREIGN KEY (`volID`) REFERENCES `vols` (`volID`) ON DELETE CASCADE,
   ADD CONSTRAINT `reservs_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
 
 --

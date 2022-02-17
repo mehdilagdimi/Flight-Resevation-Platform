@@ -17,7 +17,8 @@
                 'title' => 'List of admins',
                 'admins' => $admins
             ];
-            
+
+            $this->view('dashboard/showAdmins', $data);
         }
 
         public function showUsers(){
@@ -26,11 +27,18 @@
                 'title' => 'List of registered users',
                 'users' => $users
             ];
-            $this->view('users/showUsers', $data);
+            
+            // $this->view('users/showUsers', $data);
+            $this->view('dashboard/showUsers', $data);
         }
 
-        public function showGuests(){
-            //??
+        protected setPassword(){
+            //
         }
+
+        public function()
+        // public function showGuests(){
+        //     //??
+        // }
     }
 ?>
