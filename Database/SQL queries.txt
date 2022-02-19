@@ -3,25 +3,33 @@ CREATE DATABASE flights_platform;
 USE flights_platform;
 CREATE TABLE users (
 	userID INT NOT NULL AUTO_INCREMENT,
-    fName VARCHAR(50),
-    lName VARCHAR(50),
     phone VARCHAR(30) NOT NULL,
     email VARCHAR(60) NOT NULL,
-    age INT,
+    birthDate TIMESTAMP,
     passw VARCHAR(20) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (userID)
+);
+
+CREATE TABLE passengers (
+	passengerID INT NOT NULL AUTO_INCREMENT,
+	userID INT,
+	fName VARCHAR(50) NOT NULL,
+    	lName VARCHAR(50) NOT NULL,
+	birthDate TIMESTAMP NOT NULL,
+	PRIMARY KEY (passengerID),
+	FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
 );
 
 
 CREATE TABLE admins (
 	adminID INT NOT NULL AUTO_INCREMENT,
     privilege VARCHAR(20) NOT NULL,
-    fName VARCHAR(50),
-    lName VARCHAR(50),
+    fName VARCHAR(50) NOT NULL,
+    lName VARCHAR(50) NOT NULL,
     phone VARCHAR(30) NOT NULL,
     email VARCHAR(60) NOT NULL,
-    age INT,
+    birthDate TIMESTAMP,
     passw VARCHAR(20) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (adminID)
@@ -29,33 +37,52 @@ CREATE TABLE admins (
 
 CREATE TABLE planes (
 	planeID INT NOT NULL AUTO_INCREMENT,
-    model VARCHAR(50),
-    seats INT NOT NULL,
-    PRIMARY KEY(planeID)
+   	 model VARCHAR(50),
+    	seats INT NOT NULL,
+    	PRIMARY KEY(planeID)
 );
+
+CREATE TABLE airports(
+	airportID INT NOT NULL AUTO_INCREMENT,
+	airportAdress VARCHAR(100) NOT NULL,
+	PRIMARY KEY (airportID)
+);
+
 CREATE TABLE vols (
 	volID INT NOT NULL AUTO_INCREMENT,
     planeID INT,
     departureDate TIMESTAMP NOT NULL,
-    departureAdress VARCHAR(100) NOT NULL,
-    destinationAdress VARCHAR(100) NOT NULL,
     arrivalDate TIMESTAMP NOT NULL,
     availableSeats INT NOT NULL,
     price FLOAT,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     state VARCHAR(20),
-	PRIMARY KEY (volID),
+    PRIMARY KEY (volID),
     FOREIGN KEY (planeID) REFERENCES planes(planeID)
 );
 
+CREATE TABLE departures(
+	volID INT,
+	airportID INT,
+	FOREIGN KEY (volID) REFERENCES vols(volID) ON DELETE CASCADE,
+	FOREIGN KEY (airportID) REFERENCES airports(airportID)
+);
+
+CREATE TABLE destinations(
+	volID INT,
+	airportID INT,
+	FOREIGN KEY (volID) REFERENCES vols(volID) ON DELETE CASCADE,
+	FOREIGN KEY (airportID) REFERENCES airports(airportID)
+);
+
 CREATE TABLE reservs (
-	reservID INT NOT NULL AUTO_INCREMENT,
+    reservID INT NOT NULL AUTO_INCREMENT,
     volID INT,
-    userID INT,
+    passengerID INT,
     dateReserv TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     goingComing VARCHAR(20) NOT NULL DEFAULT 'Going',
     seatNum INT,
     PRIMARY KEY (reservID),
     FOREIGN KEY (volID) REFERENCES vols(volID) ON DELETE CASCADE,
-    FOREIGN KEY (userID) REFERENCES users(userID)
+    FOREIGN KEY (passengerID) REFERENCES passengers(passengerID) ON DELETE CASCADE
 );
