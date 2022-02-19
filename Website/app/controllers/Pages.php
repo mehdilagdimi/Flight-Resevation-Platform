@@ -2,20 +2,19 @@
     class Pages extends Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
-            $this->flightModel = $this->model('Model');
+            $this->flightModel = $this->model('Flight');
         }
 
             public function index(){ //you can get parsed params in every controller's methods after using call_user_func_array
             // echo "home page";
-            $data = $this->UserModel->getFlights();
+            $flights = $this->flightModel->getFlights();
             $data = [
                 'title' => 'Home',
-                'name' => 'ARID'
+                'flights' => $flights
             ];
 
             // $this->view('pages/index', $data);
             $this->view('pages/index', $data);
-        
         
         }
 

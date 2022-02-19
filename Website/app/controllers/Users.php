@@ -32,11 +32,11 @@
             $this->view('dashboard/showUsers', $data);
         }
 
-        protected setPassword(){
+        protected function setPassword(){
             //
         }
 
-        public function()
+        // public function showGuests()
         // public function showGuests(){
         //     //??
         // }

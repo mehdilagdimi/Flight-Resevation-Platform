@@ -1,4 +1,5 @@
 <?php
+    require_once "Planes.php";
     Class Flights extends Planes{
         public function __construct(){
             $this->flightModel = $this->model('Flight');

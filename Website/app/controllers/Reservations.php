@@ -1,4 +1,5 @@
 <?php
+    require_once "Flights.php";
     class Reservations extends Flights{
         public function __construct (){
             $this->reservModel = $this->model('Reservation');
