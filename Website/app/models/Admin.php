@@ -13,7 +13,9 @@
         
         //add parameters for specific querying
         public function getAdmin(){
-
+            $this->db->query("SELECT * FROM " . $this->table . "WHERE email = " . $email . " AND passw = " . $passw );
+            $result = $this->db->resultSet();
+            return $result;
         }
     }
 

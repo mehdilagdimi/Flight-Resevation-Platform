@@ -8,10 +8,12 @@
     // echo "<br>" .  __FILE__;
 
     // header('location : home.php');
-    foreach($data['flights'] as $flight){
-        echo "Flight departure : " . $flight->departureAdress;
-        echo '<br>';
-    }
+    // foreach($data['flights'] as $flight){
+    //     echo "Flight departure : " . $flight->departureAdress;
+    //     echo '<br>';
+    // }
+
+    echo $data['user'];
 
 ?>
 

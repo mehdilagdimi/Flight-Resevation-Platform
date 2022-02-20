@@ -6,6 +6,9 @@
         //     $this->db = new Database;
         // }
         //specify which DB table
+        // private $email;
+        // private $passw;
+
         public function __construct(){
             parent::__construct();
             $this->table = 'users';
@@ -19,6 +22,13 @@
 
         public function setUsers(){
             
+        }
+
+        public function getUser($email, $passw){
+
+                $this->db->query("SELECT * FROM " . $this->table . "WHERE email = " . $email . " AND passw = " . $passw );
+                $result = $this->db->resultSet();
+                return $result;
         }
     }
 ?> 
