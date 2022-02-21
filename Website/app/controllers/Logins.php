@@ -27,17 +27,18 @@
                 $user; 
                 $header;
                 if(isset($_POST['email'])){
-
+                    // echo 'test';
                     if(!empty($checkAdmin = $this->adminModel->getAdmin($_POST['email'], $_POST['passw']))){ 
+                        // echo 'inside admin test';
                         $user = 'admin'; 
                         $header = 'dashboard/index';
                        $this->login($user, $header, $checkAdmin);
 
                     } elseif (!empty($checkUser = $this->userModel->getUser($_POST['email'], $_POST['passw']))){
+                        // echo 'inside user test';
                         $user = 'user'; 
                         $header = 'pages/index';
                         $this->login($user, $header, $checkUser);
-                        
 
                     } else {
                         $_SESSION['loggedIn'] = false;

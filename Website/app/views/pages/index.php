@@ -19,43 +19,47 @@
 ?>
 
 <html>
-    <head></head>
-
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
+    </head>
 
     <body>
-        <!-- <div class="scroll">
-                <table style="table-layout: fixed; width : 100%; color:white;">
-                    <tr>
-                        <th><input style="color:white;" type="checkbox" id="" name="" value=""></th>
-                        <th>#</th>
-                        <th class="Hide_Name">Name</th>
-                        <th>Price</th>
-                        <th class="Hide_Cat">Category</th>
-                        <th class="Hide_Date">Add Date</th>
-                        <th>Actions</th>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Departure</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Arrival Date</th>
+                    <th scope="col">Available Seats</th>
+                    <th scope="col">Plane</th>
+                    <th scope="col">Price</th>
+                    <th scopre="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data['flights'] as $flight) { ?>
+                    <tr id="<?php echo $flight->volID; ?>">
+                        <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>
+                        <td><?= $flight->departureDate; ?></td>
+                        <td><?= $flight->departureAdress ; ?></td>
+                        <td><?= $flight->destinationAdress; ?></td>
+                        <td><?= $flight->arrivalDate; ?></td>
+                        <td><?= $flight->availableSeats; ?></td>
+                        <td><?= $flight->plane; ?></td>
+                        <td><?= $flight->price; ?></td>
+                        <td>
+                            CHECK LOGIN BEFORE ALLOW SUBMITTING
+                        </td>     
                     </tr>
-                    <?php foreach ($data['flights'] as $nft) { ?>
-                        <tr id="<?php echo $nft['id']; ?>" onclick="ActivateRow('<?php echo $nft['id']; ?>')">
-                            <td class="center"><input type="checkbox" id="" name="" value=""></td>
-                            <td class="NFT-img"><a  href="#"><img src="<?php echo $nft['imgSrc'] ?>"></a></td>
-                            <td class="Hide_Name"><a href="#"><?php echo $nft['productName'] ?></a></td>
-                            <td><a href="#"><?php echo $nft['price'] ?></a></td>
-                            <td class="Hide_Cat"><a href="#"><?php echo $nft['catName'] ?></a></td>
-                            <td class="Hide_Date"><a href="#"><?php echo $nft['createdAt']; ?></a></td>
-                            <td>
-                                <div class="actions flex center">
-                                    <form class="form_delete_button" action="crud_DB.php" method="POST">
-                                        <input type="text" name="id_product" hidden value="<?php echo $nft['id']; ?>">
-                                        <button class="DELETE_BUTTON filter-red" name="delete" style="background : none; border : none"><a href="#"><img  src="public/assets/images/delete.svg"></a></button>
-                                    </form>
-                                    <button class="UPDATE_BUTTON filter-green" name="update" style=" background : none; border : none"><a href="#"><img  src="public/assets/images/update.svg"></a></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Send id of product to highlight the row if clicked -->
-                    <?php } ?>
-                </table>
-        </div> -->
+                <?php } ?>
+            </tbody>
+        </table>
     </body>
 </html>
+
+
 
