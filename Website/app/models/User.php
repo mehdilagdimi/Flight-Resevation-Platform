@@ -26,7 +26,7 @@
 
         public function getUser($email, $passw){
 
-                $this->db->query("SELECT * FROM " . $this->table . "WHERE email = " . $email . " AND passw = " . $passw );
+                $this->db->query("SELECT * FROM " . $this->table . " WHERE email = " . $email . " AND passw = " . $passw );
                 $result = $this->db->resultSet();
                 return $result;
         }

@@ -15,6 +15,7 @@
             $result = $this->db->resultSet();
             return $result;
         }
+
         
         // public function getSpecificRows(){
         //     $this->db->query("SELECT * FROM " . $this->table . " WHERE " . $c_1 . " = ");

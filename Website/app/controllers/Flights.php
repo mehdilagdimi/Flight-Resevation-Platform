@@ -18,7 +18,7 @@
                 'flights' => $flights
             ];
             
-            $this->view('pages/index', $data);
+            // $this->view('pages/index', $data);
             $this->view('dashboard/index', $data);
         }
     } 

@@ -3,6 +3,8 @@
     // session_start();
   
     // echo $data["users"];
+    // $email = $_POST['email'];
+    // echo $email;
 ?>
 
 <html>
@@ -26,7 +28,7 @@
     </head>
     <body>
 
-        <form action="Logins/verifyLogin" method="POST">
+        <form action="Logins/verifyLogin" method="POST" >
             <section class="vh-100 gradient-custom">
                 <div class="container py-5 h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -40,18 +42,18 @@
                             <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="email" id="typeEmailX" class="form-control form-control-lg" required />
-                                <label class="form-label" for="typeEmailX">Email</label>
+                                <input type="email" id="email" class="form-control form-control-lg" name="email" required >
+                                <label class="form-label" for="email">Email</label>
                             </div>
-
+            <!-- <input type="text"> -->
                             <div class="form-outline form-white mb-4">
-                                <input type="password" id="typePasswordX" class="form-control form-control-lg" required />
-                                <label class="form-label" for="typePasswordX">Password</label>
+                                <input type="password" id="passw" class="form-control form-control-lg" name="passw"  required >
+                                <label class="form-label" for="passw">Password</label>
                             </div>
 
                             <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
-                            <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit" >Login</button>
 
                             <div class="d-flex justify-content-center text-center mt-4 pt-1">
                                 <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
