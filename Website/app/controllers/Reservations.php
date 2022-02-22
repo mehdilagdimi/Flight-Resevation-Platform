@@ -7,17 +7,23 @@
 
         //default
         public function index(){
+            session_start();
+            if(!$_SESSION['loggedIn']){
+                $this->view('pages/login');
+            }
             $this->showReservations();
         }
 
         public function showReservations(){
             //display reservations
 
-            $resers = $this->reservModel->getReservs();
+            $reservs = $this->reservModel->getReservs();
             $data = [
                 'title' => 'List of reservations',
                 'reservations' => $reservs 
             ];
+
+            $this->view('dashboard/showReservations', $data);
         }
     }
 ?>

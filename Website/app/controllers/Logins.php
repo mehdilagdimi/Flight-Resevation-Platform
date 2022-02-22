@@ -3,14 +3,16 @@
         // echo $email;
         // echo "hello";
         // echo __FILE__;
+        require_once "Flights.php";
+
         class Logins extends Controller{
             
             public function __construct(){
                 $this->userModel = $this->model('User');
                 $this->adminModel = $this->model('Admin');
-                $this->flightModel = $this->model('Flight');
-                $this->planeModel = $this->model('Plane');
-                $this->airportModel = $this->model('Airport');
+                // $this->flightModel = $this->model('Flight');
+                // $this->planeModel = $this->model('Plane');
+                // $this->airportModel = $this->model('Airport');
             }
 
             public function index(){
@@ -20,6 +22,7 @@
             // public function testlogin(){
             //     $this->view("pages/testlogin");
             // }
+            
             public function verifyLogin(){
                 // echo 'hello';
                 // echo $_POST['email']; 
@@ -32,75 +35,50 @@
                         // echo 'inside admin test';
                         $user = 'admin'; 
                         $header = 'dashboard/index';
-                       $this->login($user, $header, $checkAdmin);
+                       $this->login($user, $header);
 
                     } elseif (!empty($checkUser = $this->userModel->getUser($_POST['email'], $_POST['passw']))){
                         // echo 'inside user test';
                         $user = 'user'; 
                         $header = 'pages/index';
-                        $this->login($user, $header, $checkUser);
+                        $this->login($user, $header);
 
                     } else {
                         $_SESSION['loggedIn'] = false;
+                        echo "Invalid login";
                         $this->view('pages/login', "User not found");
                     }
                 }
              }
 
-             public function login($user, $header, $checkUser){
+             public function login($user, $header){
                         session_start();
-                        // echo 'hello';
+                        echo 'hello';
+                        $_SESSION['privilege'] = "$user";
                         $_SESSION["$user"] = $_POST['email'];
                         $_SESSION['loggedIn'] = true;  
 
-                        $flights = $this->flightModel->getFlights();
-                        $planes = $this->planeModel->getPlanes();
-                        $airports = $this->airportModel->getAirports();
-                        $departures = $this->flightModel->getDepartures();
-                        $destinations = $this->flightModel->getDestinations();
+                        // $flights = $this->flightModel->getFlights();
+                        // $planes = $this->planeModel->getPlanes();
+                        // $airports = $this->airportModel->getAirports();
+                        // $departures = $this->flightModel->getDepartures();
+                        // $destinations = $this->flightModel->getDestinations();
 
-                        $this->setReadableData($flights, $departures, $destinations, $airports, $planes);
+                        $this->setReadableData();
                         
                         // $user = ucwords()
-                        $data = [
-                            'Session user' => ucwords("$user"),
-                            'user'  => $checkUser,
-                            'flights' => $flights,
+                        // $data = [
+                        //     'Session user' => ucwords("$user"),
+                        //     'user'  => $checkUser,
+                        //     'flights' => $flights,
                             // 'planes' => $planes,
                             // 'departures' => $departures,
                             // 'destinations' => $destinations
-                        ];
+                        // ];
                         // echo "$header";
-                        $this->view("$header", $data); 
+                        // $this->view("$header", $data); 
              }
              
-             public function setReadableData($flights, $departures, $destinations, $airports, $planes){
-                foreach ($flights as $flight){
-                    foreach($planes as $plane){
-                        if($flight->planeID == $plane->planeID){
-                            $flight->plane = $plane->model;
-                        }
-                    }
-                    foreach($departures as $departure){
-                        if($flight->volID == $departure->volID){
-                            foreach($airports as $airport){
-                                if($departure->airportID == $airport->airportID){
-                                    $flight->departureAdress = $airport->airportAdress;
-                                }
-                            }
-                        }
-                    }
-                    foreach($destinations as $destination){
-                        if($flight->volID == $destination->volID){
-                            foreach($airports as $airport){
-                                if($destination->airportID == $airport->airportID){
-                                    $flight->destinationAdress = $airport->airportAdress;
-                                }
-                            }
-                        }
-                    }
-
-                }
-             }
+             
         }
 ?>

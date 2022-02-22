@@ -8,16 +8,16 @@
 
         public function index(){ //you can get parsed params in every controller's methods after using call_user_func_array
             // echo "home page";
-            $flights = $this->flightModel->getFlights();
-            $data = [
-                'title' => 'Home',
-                'flights' => $flights
-            ];
+            // $flights = $this->flightModel->getFlights();
+            // $data = [
+            //     'title' => 'Home',
+            //     'flights' => $flights
+            // ];
                             
             if(isset($_SESSION['admin'])){
                 // $this->view('pages/index', $data);
-                $this->view('pages/index', $data);
-                header ("location : ./../../dashboard/index.php");
+                $this->view('dashboard/index', $data);
+                // header ("location : ./../../dashboard/index.php");
             }
             if(isset($_SESSION['user'])){
                   // $this->view('pages/index', $data);

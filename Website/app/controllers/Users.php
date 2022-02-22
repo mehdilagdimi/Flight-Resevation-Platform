@@ -7,7 +7,15 @@
 
         //call showUsers because index is set up as default method so to make showUsers as default when requesting from Users class
         public function index(){
-            $this->showUsers();
+            session_start();
+            if(!$_SESSION['loggedIn']){
+                $this->view('pages/login');
+            }
+            if($_SESSION['privelege'] == 'admin'){
+                $this->showUsers();
+            } else {
+                $this->view('pages/index');
+            }
             // echo 'hello from users controller';
         }
 
