@@ -1,5 +1,5 @@
 <?php
-
+    require_once "Flights.php";
     class Pages extends Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
@@ -13,21 +13,26 @@
             //     'title' => 'Home',
             //     'flights' => $flights
             // ];
-                            
-            if(isset($_SESSION['admin'])){
-                // $this->view('pages/index', $data);
-                $this->view('dashboard/index', $data);
-                // header ("location : ./../../dashboard/index.php");
+            session_start();   
+            if(isset($_SESSION['loggedIn'])){
+                if($_SESSION['privilege'] == 'admin'){
+                    // $this->view('pages/index', $data);
+                    $flightsController = new Flights;
+                    $flightsController->setReadableData();
+                    // $this->view('dashboard/index', $data);
+                    // header ("location : ./../../dashboard/index.php");
+                }
+                if($_SESSION['privilege'] == 'user'){
+                      // $this->view('pages/index', $data);
+                    $flightsController = new Flights;
+                    $flightsController->setReadableData();
+                    // $this->view('pages/index', $data);
+                }
+            } else {
+                $this->view('pages/login');
             }
-            if(isset($_SESSION['user'])){
-                  // $this->view('pages/index', $data);
-                $this->view('pages/index', $data);
-                header ("location : ./../../pages/index.php");
-            }
-
-            $this->view('pages/login');
-        
         }
+        
 
 
         public function signup(){

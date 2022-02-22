@@ -11,7 +11,7 @@
             if(!$_SESSION['loggedIn']){
                 $this->view('pages/login');
             }
-            if($_SESSION['privelege'] == 'admin'){
+            if($_SESSION['privilege'] == 'admin'){
                 $this->showUsers();
             } else {
                 $this->view('pages/index');

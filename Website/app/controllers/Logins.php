@@ -49,11 +49,15 @@
                         $this->view('pages/login', "User not found");
                     }
                 }
+                else {
+                    echo 'Enter an email to log in';
+                    $this->view('pages/login');
+                }
              }
 
              public function login($user, $header){
                         session_start();
-                        echo 'hello';
+                        // echo 'hello';
                         $_SESSION['privilege'] = "$user";
                         $_SESSION["$user"] = $_POST['email'];
                         $_SESSION['loggedIn'] = true;  
@@ -63,8 +67,9 @@
                         // $airports = $this->airportModel->getAirports();
                         // $departures = $this->flightModel->getDepartures();
                         // $destinations = $this->flightModel->getDestinations();
-
-                        $this->setReadableData();
+                        $flightsController = new Flights;
+                        // $this->setReadableData();
+                        $flightsController->setReadableData();
                         
                         // $user = ucwords()
                         // $data = [

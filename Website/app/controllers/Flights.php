@@ -14,18 +14,21 @@
             // if(!$_SESSION['loggedIn']){
             //     $this->view('pages/login');
             // }
-            if($_SESSION['privilege'] == 'admin'){
-                $this->setReadableData();
-            } else {
-                $this->view('pages/index');
+            if(isset($_SESSION['loggedIn'])){
+                if($_SESSION['loggedIn'] == true){
+                    $this->setReadableData();
+                } else {
+                    $this->view('pages/login');
+                }
             }
+
         }
 
         public function showFlights($flights){
             //Display flights
             // $flights = $this->flightModel->getFlights();
             $data = [
-                'Session user' => ucwords($_SESSION['privilige']),
+                'Session user' => ucwords($_SESSION['privilege']),
                 // 'user'  => $checkUser,
                 'flights' => $flights
             ];
