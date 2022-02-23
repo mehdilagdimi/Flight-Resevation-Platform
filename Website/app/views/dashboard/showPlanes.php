@@ -31,12 +31,15 @@
                         <td><?= $plane->model ; ?></td>
                         <td><?= $plane->seats; ?></td>
                         <td>
-                            <div class="">
-                                <form class="" action="" method="POST">
+                        <div class="d-flex flex-row justify-content-between">
+                                <form class="" action="<?=URLROOT?>flights/updateFlight" method="POST">
                                     <input type="text" name="id_vol" hidden value="<?= $plane->planeID; ?>">
-                                    <a href="#"><i style="color:white;" class="fa-solid fa-circle-plus"></i></a>
+                                    <button class="btn btn-primary" name="update" style="">UPDATE</button>
                                 </form>
-                                <a href="#"><i class="fa-solid fa-rotate-right"></i></a>
+                                <form class="" action="<?=URLROOT?>flights/deleteFlight" method="POST">
+                                    <input type="text" name="id_plane" hidden value="<?= $plane->planeID; ?>">
+                                    <button class="btn btn-danger" name="delete" style="">DELETE</button>
+                                </form>
                             </div>
                         </td>     
                     </tr>

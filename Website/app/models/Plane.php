@@ -8,5 +8,10 @@
         public function getPlanes(){
             return $this->getTable();
         }
+
+        public function deletePlane($planeID){
+            $this->db->query("DELETE FROM planes WHERE id='$planeID'");
+            $this->db->execute();
+         }
     }
 ?>

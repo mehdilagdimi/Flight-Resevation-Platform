@@ -19,6 +19,13 @@
 
             $this->view('dashboard/showPlanes', $data); 
         }
+
+        public function deletePlane(){
+            if (isset($_POST['delete'])){
+                $id = $_POST['id_plane'];
+                $this->planeModel->deletePlane($id);
+            }
+         }
     }
 
 ?>

@@ -33,5 +33,10 @@
                 $result = $this->db->resultSet();
                 return $result;
         }
+
+        public function deleteUser($userID){
+            $this->db->query("DELETE FROM users WHERE id='$userID'");
+            $this->db->execute();
+        }
     }
 ?> 

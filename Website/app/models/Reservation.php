@@ -11,6 +11,11 @@
         public function getReservs(){
             return $this->getTable();
         }
+
+        public function deleteReserv($reservID){
+            $this->db->query("DELETE FROM reservs WHERE id='$reservID'");
+            $this->db->execute();
+        }
     }
 
     

@@ -15,7 +15,7 @@
             if($_SESSION['privilege'] == 'admin'){
                 $this->showUsers();
             } else {
-                $this->view('pages/index');
+                $this->view('pages/login');
             }
             // echo 'hello from users controller';
         }
@@ -59,6 +59,12 @@
             $this->view('pages/login');
          }
 
+         public function deleteUser(){
+            if (isset($_POST['delete'])){
+                $id = $_POST['id_user'];
+                $this->userModel->deleteUser($id);
+            }
+         }
         // public function showGuests()
         // public function showGuests(){
         //     //??

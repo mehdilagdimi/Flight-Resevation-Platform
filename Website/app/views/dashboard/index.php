@@ -40,6 +40,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+        
     </head>
 
     <body>
@@ -69,12 +71,15 @@
                         <td><?= $flight->plane; ?></td>
                         <td><?= $flight->price; ?></td>
                         <td>
-                            <div class="">
-                                <form class="" action="" method="POST">
+                            <div class="d-flex flex-row justify-content-between">
+                                <form class="" action="<?=URLROOT?>flights/updateFlight" method="POST">
                                     <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
-                                    <a href="#"><i style="color:white;" class="fa-solid fa-circle-plus"></i></a>
+                                    <button class="btn btn-primary" name="update" style="">UPDATE</button>
                                 </form>
-                                <a href="#"><i class="fa-solid fa-rotate-right"></i></a>
+                                <form class="" action="<?=URLROOT?>flights/deleteFlight" method="POST">
+                                    <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
+                                    <button class="btn btn-danger" name="delete" style="">DELETE</button>
+                                </form>
                             </div>
                         </td>     
                     </tr>

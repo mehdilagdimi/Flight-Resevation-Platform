@@ -59,7 +59,7 @@
              public function login($user, $header){
                         session_start();
                         // echo 'hello';
-                        $_SESSION['privilege'] = "$user";
+                        $_SESSION['privilege'] = $user;
                         $_SESSION["$user"] = $_POST['email'];
                         $_SESSION['loggedIn'] = true;  
 
@@ -85,6 +85,13 @@
                         // $this->view("$header", $data); 
              }
              
+             public function logout(){
+                session_start();
+                session_unset();
+                session_destroy();
+                // header("location: login.php");
+                $this->view('pages/login');
+             }
 
         }
 ?>

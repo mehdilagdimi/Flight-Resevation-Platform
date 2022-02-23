@@ -19,6 +19,13 @@
 
             $this->view('dashboard/showAirports', $data); 
         }
+
+        public function deleteAirport(){
+            if (isset($_POST['delete'])){
+                $id = $_POST['id_airport'];
+                $this->airportModel->deleteUser($id);
+            }
+         }
     }
 
 ?>

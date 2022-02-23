@@ -34,7 +34,7 @@
             ];
             
             // $this->view('pages/index', $data);
-            if($_SESSION['privelege'] = 'admin'){
+            if($_SESSION['privilege'] == 'admin'){
                 $this->view('dashboard/index', $data);
             } else {
                 $this->view('pages/index', $data);
@@ -78,6 +78,20 @@
 
             }
             $this->showFlights($flights);
+         }
+
+         public function deleteFlight(){
+            if (isset($_POST['delete'])){
+                $id = $_POST['id_vol'];
+                $this->flightModel->deleteFlight($id);
+            }
+         }
+
+         public function updateFlight(){
+            if (isset($_POST['delete'])){
+                $id = $_POST['id_vol'];
+                $this->flightModel->deleteFlight($id);
+            }
          }
     } 
 ?>

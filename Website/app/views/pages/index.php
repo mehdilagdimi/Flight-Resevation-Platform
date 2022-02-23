@@ -52,7 +52,17 @@
                         <td><?= $flight->plane; ?></td>
                         <td><?= $flight->price; ?></td>
                         <td>
-                            CHECK LOGIN BEFORE ALLOW SUBMITTING
+                        <div class="d-flex flex-row justify-content-between">
+                                <form class="" action="<?=URLROOT?>flights/updateFlight" method="POST">
+                                    <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
+                                    <button class="btn btn-success" name="reserve" style="">RESERVE</button>
+                                </form>
+                                <!-- add a button for cancelling reservation -->
+                                <form class="" action="<?=URLROOT?>flights/deleteFlight" method="POST">
+                                    <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
+                                    <button class="btn btn-warning" name="cancel" style="">CENCEL</button>
+                                </form>
+                            </div>
                         </td>     
                     </tr>
                 <?php } ?>

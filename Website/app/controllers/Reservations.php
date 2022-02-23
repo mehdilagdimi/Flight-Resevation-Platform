@@ -8,22 +8,40 @@
         //default
         public function index(){
             session_start();
+    
             if(!$_SESSION['loggedIn']){
+              
                 $this->view('pages/login');
+            }else {
+                // echo "test";
+                $this->showReservations();
             }
-            $this->showReservations();
+           
         }
 
         public function showReservations(){
             //display reservations
-
+            // echo 
             $reservs = $this->reservModel->getReservs();
             $data = [
                 'title' => 'List of reservations',
                 'reservations' => $reservs 
             ];
-
-            $this->view('dashboard/showReservations', $data);
+            //  echo $_SESSION['privilege'];
+            if($_SESSION['privilege'] == 'admin'){
+                $this->view('dashboard/showReservations', $data);
+                // echo 'test';
+            } else {
+                echo "user reservations view";
+                $this->view('pages/reservations', $data);
+            }
         }
+
+        public function cancelReservation(){
+            if (isset($_POST['delete'])){
+                $id = $_POST['id_reserv'];
+                $this->reservModel->deleteReserv($id);
+            }
+         }
     }
 ?>
