@@ -6,7 +6,7 @@
 
    RewriteEngine on
 
-    RewriteBase '/Flight Reservation Platform/Website/public'
+    RewriteBase '/Flight Reservation Platform/Website'
    # Send request via index.php
     
    RewriteCond %{REQUEST_FILENAME} !-f

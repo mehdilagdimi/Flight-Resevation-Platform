@@ -20,8 +20,11 @@
             return $this->getTable();
         }
 
-        public function setUsers(){
-            
+        public function setUser($phone, $email, $birthDate, $passw){
+            // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
+            // return;
+            $this->db->query("INSERT INTO $this->table (phone, email, birthDate, passw) VALUES ('$phone', '$email', '$birthDate', '$passw') ");
+            $this->db->execute();
         }
 
         public function getUser($email, $passw){

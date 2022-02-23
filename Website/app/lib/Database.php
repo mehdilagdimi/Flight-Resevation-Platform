@@ -48,7 +48,7 @@
             $this->statement->bindValue($parameter, $value, $type);
         }
         //exceute statement
-        public function execute () {
+        public function execute() {
             return $this->statement->execute();
         }
         //Return an array

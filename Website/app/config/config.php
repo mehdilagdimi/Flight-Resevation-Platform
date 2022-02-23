@@ -11,7 +11,7 @@
     //app root
     define('APPROOT', dirname(dirname(__FILE__)));
     //url root
-    define('URLROOT', 'localhost/Flight Reservation Platform/Website');
+    define('URLROOT', 'http://localhost/Flight Reservation Platform/Website/');
 
     //sitename
     define('SITENAME', 'Flight Reservation Platform');

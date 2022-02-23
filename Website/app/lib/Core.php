@@ -18,7 +18,7 @@
 
             //require the controller
             require_once '../app/controllers/' . $this->currentController . '.php';
-            $this->currentController = new $this->currentController; //are parenthesis not important?
+            $this->currentController = new $this->currentController; 
             //check fpr secprd ûrl param
             if(isset($url[1])){
                 if(method_exists($this->currentController, $url[1])){

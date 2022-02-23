@@ -7,6 +7,6 @@
 
     require_once 'config/config.php';
     //instantiate core class
-
+    
     $init = new Core();
 ?>

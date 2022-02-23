@@ -16,6 +16,7 @@
             }
 
             public function index(){
+                // echo "test 3";
                 $this->verifyLogin();
             }
 
@@ -84,6 +85,6 @@
                         // $this->view("$header", $data); 
              }
              
-             
+
         }
 ?>

@@ -28,7 +28,7 @@
     </head>
     <body>
 
-        <form action="Logins/index" method="POST" >
+        <form action="<?= URLROOT ?>logins/index" method="POST" >
             <section class="vh-100 gradient-custom">
                 <div class="container py-5 h-100">
                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -64,7 +64,8 @@
                             </div>
 
                             <div>
-                            <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
+                            <!-- <p class="mb-0">Don't have an account? <a href=">" class="text-white-50 fw-bold">Sign Up</a></p> -->
+                            <p class="mb-0">Don't have an account? <a href="<?= URLROOT ?>pages/signup" class="text-white-50 fw-bold">Sign Up</a></p>
                             </div>
 
                         </div>
