@@ -16,6 +16,15 @@
             return $result;
         }
 
+        public function getSpecific($col, $constraint){
+            $this->db->query("SELECT * FROM $this->table WHERE $col = '$constraint'");
+            $result = $this->db->resultSet();
+            return $result;
+        }
+
+        // public function addRecord($constraints_arr){
+        //     $this->db->query("INSERT INTO ")
+        // }
         
         // public function getSpecificRows(){
         //     $this->db->query("SELECT * FROM " . $this->table . " WHERE " . $c_1 . " = ");

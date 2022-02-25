@@ -75,20 +75,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div> -->
                     <div class="modal-body modal-dialog-centered">
-                        <form>
+                        <form action="<?= URLROOT ?>flights/addFlight" method="POST">
                             <!-- 2 column grid layout with text inputs for the first and last names -->
                             <div class="row mb-4">
 
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="id_plane"">Plane ID</label>
-                                    <input type=" text" id="id_plane" class="form-control" />
+                                    <label class="form-label" for="id_plane"">Plane Model</label>
+                                    <input type=" text" id="id_plane" name="plane" class="form-control" />
 
                                 </div>
 
 
                                 <div class=" form-outline mb-4">
                                     <label class="form-label" for="id_departDate">Departure Date</label>
-                                    <input type="datetime-local" id="id_departDate" class="form-control" />
+                                    <input type="datetime-local" id="id_departDate" name="id_departDate" class="form-control" />
 
                                 </div>
 
@@ -96,7 +96,7 @@
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="id_arrivalDate">Arrival Date</label>
-                                    <input type="datetime-local" id="id_arrivalDate" class="form-control" />
+                                    <input type="datetime-local" id="id_arrivalDate" name="id_arrivalDate"class="form-control" />
 
                                 </div>
 
@@ -105,13 +105,13 @@
                                 <div class="col">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_airport">From</label>
-                                        <input type="text" id="id_airportFROM" class="form-control" />
+                                        <input type="text" id="id_airportFROM" name="id_airportFROM" class="form-control" />
 
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_seats">Available Seats</label>
-                                        <input type="number" id="id_seats" class="form-control" />
+                                        <input type="number" id="id_seats" name="id_seats" class="form-control" />
 
                                     </div>
 
@@ -121,27 +121,27 @@
                                 <div class="col">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_airportTo">To</label>
-                                        <input type="text" id="id_airportTo" class="form-control" />
+                                        <input type="text" id="id_airportTO" name="id_airportTO" class="form-control" />
 
                                     </div>
 
                                     <!-- Text input -->
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_state">Going/Coming</label>
-                                        <input type="text" id="id_state" class="form-control" />
+                                        <input type="text" id="id_state" name="id_state" class="form-control" />
 
                                     </div>
                                 </div>
                                 <!-- Message input -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="id_price">Price</label>
-                                    <input type="number" step="0.01" min=0 id="id_price" class="form-control" />
+                                    <input type="number" step="0.01" min=0 id="id_price" name="id_price" class="form-control" />
 
                                 </div>
                                 <!-- Submit button -->
                                 <div class="form-outline d-flex flex-row justify-content-end">          
                                     <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success btn-block mx-1">SAVE FLIGHT</button>
+                                    <button type="submit" name="saveflight" class="btn btn-success btn-block mx-1">SAVE FLIGHT</button>
                                     </div>
                             </div>
                         </form>
@@ -156,11 +156,11 @@
             <table class="table table-dark table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">#</th>                      
+                        <th scope="col">FROM</th>
+                        <th scope="col">TO</th>
                         <th scope="col">Departure</th>
-                        <th scope="col">Destination</th>
-                        <th scope="col">Arrival Date</th>
+                        <th scope="col">Arrival</th>
                         <th scope="col">Available Seats</th>
                         <th scope="col">Plane</th>
                         <th scope="col">Price</th>
@@ -170,10 +170,10 @@
                 <tbody>
                     <?php foreach ($data['flights'] as $flight) { ?>
                         <tr id="<?php echo $flight->volID; ?>">
-                            <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>
-                            <td><?= $flight->departureDate; ?></td>
+                            <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>                          
                             <td><?= $flight->departureAdress; ?></td>
                             <td><?= $flight->destinationAdress; ?></td>
+                            <td><?= $flight->departureDate; ?></td>
                             <td><?= $flight->arrivalDate; ?></td>
                             <td><?= $flight->availableSeats; ?></td>
                             <td><?= $flight->plane; ?></td>

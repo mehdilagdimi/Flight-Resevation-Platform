@@ -27,7 +27,6 @@
         //write queries 
         public function query($sql){
             $this->statement = $this->dbHandler->prepare($sql);
-
         }
 
         //Bind values

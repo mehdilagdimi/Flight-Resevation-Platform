@@ -6,6 +6,7 @@
         public function __construct(){
             parent::__construct();
             $this->table = 'vols';
+            // $this->planeModel = new Plane;
         }
 
         public function getFlights(){
@@ -27,11 +28,49 @@
         }
 
         public function addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state){
-                $this->db->query("INSERT INTO $this->table VALUES (volID, passengerID, dateReserv, goingComing, seatNum) VALUES ('$planeID', '$departureDate', '$arrivalDate', '$availableSeats', '$price', '$state') ");
+                // echo 'inside addflight in FLight model';
+                $this->db->query("INSERT INTO $this->table (planeID, departureDate, arrivalDate, availableSeats, price, state) VALUES ('$planeID', '$departureDate', '$arrivalDate', '$availableSeats', '$price', '$state') ");
                 $this->db->execute();
+                return $this->getRecordHighestID();
             } 
+        public function getRecordHighestID(){
+            $this->db->query("SELECT * FROM $this->table WHERE volID = (SELECT max(volID) FROM $this->table)");
+            $record = $this->db->single();
+            $maxID = $record->volID;
+            return $maxID;
+        }
 
+        public function addDeparture($volID, $airportID){
+            $this->table = 'departures';
+            $this->db->query("INSERT INTO $this->table (volID, airportID) VALUES ('$volID', '$airportID') ");
+            $this->db->execute();
+            $this->table = 'vols';
+            // return $result;
+        }
+
+        public function addDestination($volID, $airportID){
+            $this->table = 'destinations';
+            $this->db->query("INSERT INTO $this->table (volID, airportID) VALUES ('$volID', '$airportID') ");
+            $this->db->execute();
+            $this->table = 'vols';
+            // return $result;
+        }
+
+        public function getDeparture($volID, $airportID){
+            $this->table = 'departures';
+            $result = $this->getSpecific($volID, $airportID);
+            $this->table = 'vols';
+            return $result;
+        }
+
+        public function getDestination($volID, $airportID){
+            $this->table = 'destinations';
+            $result = $this->getSpecific($volID, $airportID);
+            $this->table = 'vols';
+            return $result;
+        }
         public function getDepartures(){
+           
             $this->table = 'departures';
             $result = $this->getTable();
             $this->table = 'vols';
@@ -39,6 +78,7 @@
         }
 
         public function getDestinations(){
+            
             $this->table = 'destinations';
             $result = $this->getTable();
             $this->table = 'vols';

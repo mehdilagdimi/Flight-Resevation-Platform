@@ -15,5 +15,6 @@
 
     //sitename
     define('SITENAME', 'Flight Reservation Platform');
-
+    
+    // session_start();
 ?>

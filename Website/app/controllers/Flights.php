@@ -1,15 +1,18 @@
 <?php
     require_once "Planes.php";
+//     require_once "Airports.php";
 
-    class Destinations extends Controller{
-        public function __construct(){
-            $this->flightModel = $this->model('Flight');
-        }
-    }
+    // class Destinations extends Controller{
+    //     public function __construct(){
+    //         $this->flightModel = $this->model('Flight');
+    //     }
+    // }
 
-    class Departures extends Controller{
-
-    }
+    // class Departures extends Controller{
+    //     public function __construct(){
+    //         $this->flightModel = $this->model('Flight');
+    //     }
+    // }
 
     Class Flights extends Planes{
         public function __construct(){
@@ -90,11 +93,48 @@
             $this->showFlights($flights);
          }
 
-         public function addFlight($phone, $email, $birthDate, $passw){
+         public function addFlight(){
             // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
-            // return;
-            $this->db->query("INSERT INTO $this->table (phone, email, birthDate, passw) VALUES ('$phone', '$email', '$birthDate', '$passw') ");
-            $this->db->execute();
+            // return; //     echo"<pre>";
+            //     print_r($_POST);
+            //     return;
+            // if(){
+           
+            // }
+           
+
+            session_start();
+            // echo $_POST['plane'];
+            // echo $_SESSION["privilege"]; 
+            if(isset($_SESSION["privilege"]) && isset($_POST['saveflight']) ){
+                if($_SESSION["privilege"] == 'admin'){
+                    // echo 'inside addflight in FLights contro';
+                    $planeModel = $_POST['plane'];
+                    $departureDate =  $_POST['id_departDate'];
+                    $arrivalDate = $_POST['id_arrivalDate'];
+                    $airportFROM = $_POST['id_airportFROM'];
+                    $airportTO = $_POST['id_airportTO'];
+                    $state = $_POST['id_state'];
+                    $availableSeats = $_POST['id_seats'];
+                    $price = $_POST['id_price'];
+
+                    // echo "plane  $planeModel";
+                    $planeID = $this->planeModel->getPlaneID($planeModel);           
+                    // echo "plane ID $planeID";
+                    //add method will return flight ID
+                    $volID = $this->flightModel->addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state);
+                    
+                    $airportID = $this->airportModel->getAirportID($airportFROM);
+                    // echo "test h";
+                    $this->flightModel->addDeparture($volID, $airportID);
+
+                    $airportID = $this->airportModel->getAirportID($airportTO);
+                    $this->flightModel->addDestination($volID, $airportID);
+                }
+            }
+            $_POST = [];
+            $this->setReadableData();
+            
         }
 
          public function deleteFlight(){
@@ -112,5 +152,4 @@
             }
          }
 
-    } 
-?>
+    }
