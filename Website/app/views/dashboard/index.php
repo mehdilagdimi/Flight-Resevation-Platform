@@ -153,7 +153,7 @@
 
         <!-- Flights table -->
         <section class="vh-100">
-            <table class="table table-dark table-hover">
+            <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
                         <th scope="col">#</th>                      
@@ -179,14 +179,14 @@
                             <td><?= $flight->plane; ?></td>
                             <td><?= $flight->price; ?></td>
                             <td>
-                                <div class="d-flex flex-row justify-content-between">
+                                <div class="d-flex flex-row justify-content-evenly">
                                     <form class="" action="<?= URLROOT ?>flights/updateFlight" method="POST">
                                         <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
-                                        <button class="btn btn-primary" name="update" style="">UPDATE</button>
+                                        <button class="btn btn-primary mx-1" name="update" style="">UPDATE</button>
                                     </form>
                                     <form class="" action="<?= URLROOT ?>flights/deleteFlight" method="POST">
                                         <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
-                                        <button class="btn btn-danger" name="delete" style="">DELETE</button>
+                                        <button class="btn btn-danger mx-1" name="delete" style="">DELETE</button>
                                     </form>
                                 </div>
                             </td>

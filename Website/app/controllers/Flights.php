@@ -133,7 +133,9 @@
                 }
             }
             $_POST = [];
-            $this->setReadableData();
+            
+            header("location:" . URLROOT ."flights/index");
+            // $this->setReadableData();
             
         }
 
@@ -143,6 +145,7 @@
                 // echo " test delete $id"; 
                 $this->flightModel->deleteFlight($id);
             }
+            header("location:" . URLROOT ."flights/index");
          }
 
          public function updateFlight(){
@@ -150,6 +153,6 @@
                 $id = $_POST['id_vol'];
                 $this->flightModel->deleteFlight($id);
             }
+            header("location:" . URLROOT ."flights/index");
          }
-
     }

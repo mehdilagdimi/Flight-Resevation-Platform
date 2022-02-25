@@ -89,8 +89,8 @@
                 session_start();
                 session_unset();
                 session_destroy();
-                // header("location: login.php");
-                $this->view('pages/login');
+                header("location:" . URLROOT . "logins");
+                // $this->view('pages/login');
              }
 
         }
