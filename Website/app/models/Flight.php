@@ -22,14 +22,14 @@
             $this->db->execute();
         }
 
-        public function updateFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state){
-            $this->db->query("UPDATE $this->table SET planeID = '$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price', [state]='$state' WHERE id='$volID'");
+        public function updateFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price){
+            $this->db->query("UPDATE $this->table SET planeID = '$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price' WHERE id='$volID'");
             $this->db->execute();
         }
 
-        public function addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state){
+        public function addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price){
                 // echo 'inside addflight in FLight model';
-                $this->db->query("INSERT INTO $this->table (planeID, departureDate, arrivalDate, availableSeats, price, state) VALUES ('$planeID', '$departureDate', '$arrivalDate', '$availableSeats', '$price', '$state') ");
+                $this->db->query("INSERT INTO $this->table (planeID, departureDate, arrivalDate, availableSeats, price) VALUES ('$planeID', '$departureDate', '$arrivalDate', '$availableSeats', '$price') ");
                 $this->db->execute();
                 return $this->getRecordHighestID();
             } 
@@ -84,5 +84,6 @@
             $this->table = 'vols';
             return $result;
         }
+        
     }
 ?>

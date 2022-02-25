@@ -114,7 +114,7 @@
                     $arrivalDate = $_POST['id_arrivalDate'];
                     $airportFROM = $_POST['id_airportFROM'];
                     $airportTO = $_POST['id_airportTO'];
-                    $state = $_POST['id_state'];
+                    // $state = $_POST['id_state'];
                     $availableSeats = $_POST['id_seats'];
                     $price = $_POST['id_price'];
 
@@ -122,7 +122,7 @@
                     $planeID = $this->planeModel->getPlaneID($planeModel);           
                     // echo "plane ID $planeID";
                     //add method will return flight ID
-                    $volID = $this->flightModel->addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state);
+                    $volID = $this->flightModel->addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price);
                     
                     $airportID = $this->airportModel->getAirportID($airportFROM);
                     // echo "test h";

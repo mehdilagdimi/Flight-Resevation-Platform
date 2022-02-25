@@ -19,7 +19,15 @@
             // $result = $this->db->resultSet();
             return $this->getTable();
         }
-
+        public function getPassengers(){
+            $this->table = 'passengers';
+            $results = $this->getTable();
+            $this->table = 'users';
+            return $results;
+        }
+        public function getPassengerID(){
+            
+        }
         public function addUser($phone, $email, $birthDate, $passw){
             // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
             // return;

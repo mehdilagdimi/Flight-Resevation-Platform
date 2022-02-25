@@ -58,10 +58,10 @@
                                 <button class="btn btn-success" name="reserve" style="">RESERVE</button>
                             </form>
                             <!-- add a button for cancelling reservation -->
-                            <form class="" action="<?= URLROOT ?>flights/deleteFlight" method="POST">
+                            <!-- <form class="" action="<?= URLROOT ?>flights/deleteFlight" method="POST">
                                 <input type="text" name="id_vol" hidden value="<?= $flight->volID; ?>">
                                 <button class="btn btn-warning" name="cancel" style="">CENCEL</button>
-                            </form>
+                            </form> -->
                         </div>
                     </td>
                 </tr>
