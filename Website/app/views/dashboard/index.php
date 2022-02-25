@@ -177,7 +177,7 @@
                             <td><?= $flight->arrivalDate; ?></td>
                             <td><?= $flight->availableSeats; ?></td>
                             <td><?= $flight->plane; ?></td>
-                            <td><?= $flight->price; ?></td>
+                            <td><?= $flight->price; ?>DH</td>
                             <td>
                                 <div class="d-flex flex-row justify-content-evenly">
                                     <form class="" action="<?= URLROOT ?>flights/updateFlight" method="POST">
