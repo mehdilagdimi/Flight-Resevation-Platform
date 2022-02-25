@@ -7,16 +7,19 @@
 
         //call showUsers because index is set up as default method so to make showUsers as default when requesting from Users class
         public function index(){
-            echo 'test new';
+            // echo 'test new';
             session_start();
-            if(!$_SESSION['loggedIn']){
-                $this->view('pages/login');
-            }
-            if($_SESSION['privilege'] == 'admin'){
-                $this->showUsers();
-            } else {
-                $this->view('pages/login');
-            }
+            if(isset($_SESSION['loggedIn'])){
+                if(!$_SESSION['loggedIn']){
+                    $this->view('pages/login');
+                }
+                if($_SESSION['privilege'] == 'admin'){
+                    $this->showUsers();
+                }
+            } 
+            // else {
+            //     $this->view('pages/index');
+            // }
             // echo 'hello from users controller';
         }
 
@@ -54,7 +57,7 @@
 
             if(isset($_POST['email'])){
                 // echo 'add user';
-                $this->userModel->setUser($_POST['phone'], $_POST['email'], $_POST['birthdate'], $_POST['passw']);
+                $this->userModel->addUser($_POST['phone'], $_POST['email'], $_POST['birthdate'], $_POST['passw']);
             }
             $this->view('pages/login');
          }

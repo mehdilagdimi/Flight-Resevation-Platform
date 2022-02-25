@@ -51,7 +51,7 @@
                     }
                 }
                 else {
-                    echo 'Enter an email to log in';
+                    // echo 'Enter an email to log in';
                     $this->view('pages/login');
                 }
              }

@@ -10,7 +10,7 @@
         }
 
         public function deletePlane($planeID){
-            $this->db->query("DELETE FROM planes WHERE id='$planeID'");
+            $this->db->query("DELETE FROM $this->table WHERE planeID='$planeID'");
             $this->db->execute();
          }
     }

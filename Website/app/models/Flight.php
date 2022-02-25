@@ -17,14 +17,19 @@
         // }
 
         public function deleteFlight($planeID){
-            $this->db->query("DELETE FROM vols WHERE id='$planeID'");
+            $this->db->query("DELETE FROM $this->table WHERE volID = '$planeID'");
             $this->db->execute();
         }
 
-        public function updateFlight($volID, $planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state){
-            $this->db->query("UPDATE vols SET planeID = '$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price', [state]='$state' WHERE id='$volID'");
+        public function updateFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state){
+            $this->db->query("UPDATE $this->table SET planeID = '$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price', [state]='$state' WHERE id='$volID'");
             $this->db->execute();
         }
+
+        public function addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price, $state){
+                $this->db->query("INSERT INTO $this->table VALUES (volID, passengerID, dateReserv, goingComing, seatNum) VALUES ('$planeID', '$departureDate', '$arrivalDate', '$availableSeats', '$price', '$state') ");
+                $this->db->execute();
+            } 
 
         public function getDepartures(){
             $this->table = 'departures';

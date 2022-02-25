@@ -6,7 +6,19 @@
 
     //default method
         public function index(){
-            $this->showAirports();
+            session_start();
+            if(isset($_SESSION['loggedIn'])){
+                if(!$_SESSION['loggedIn']){
+                    $this->view('pages/login');
+                }
+                if($_SESSION['privilege'] == 'admin'){
+                    $this->showAirports();
+                }
+            } 
+            // else {
+            //     $this->view('pages/login');
+            // }
+          
         }
 
         public function showAirports(){

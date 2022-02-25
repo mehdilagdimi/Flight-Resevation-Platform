@@ -20,7 +20,7 @@
             return $this->getTable();
         }
 
-        public function setUser($phone, $email, $birthDate, $passw){
+        public function addUser($phone, $email, $birthDate, $passw){
             // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
             // return;
             $this->db->query("INSERT INTO $this->table (phone, email, birthDate, passw) VALUES ('$phone', '$email', '$birthDate', '$passw') ");
@@ -35,7 +35,7 @@
         }
 
         public function deleteUser($userID){
-            $this->db->query("DELETE FROM users WHERE id='$userID'");
+            $this->db->query("DELETE FROM $this->table WHERE userID='$userID'");
             $this->db->execute();
         }
     }

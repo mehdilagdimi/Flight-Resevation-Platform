@@ -1,5 +1,16 @@
 <?php
     require_once "Planes.php";
+
+    class Destinations extends Controller{
+        public function __construct(){
+            $this->flightModel = $this->model('Flight');
+        }
+    }
+
+    class Departures extends Controller{
+
+    }
+
     Class Flights extends Planes{
         public function __construct(){
             $this->flightModel = $this->model('Flight');
@@ -21,7 +32,6 @@
                     $this->view('pages/login');
                 }
             }
-
         }
 
         public function showFlights($flights){
@@ -80,9 +90,17 @@
             $this->showFlights($flights);
          }
 
+         public function addFlight($phone, $email, $birthDate, $passw){
+            // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
+            // return;
+            $this->db->query("INSERT INTO $this->table (phone, email, birthDate, passw) VALUES ('$phone', '$email', '$birthDate', '$passw') ");
+            $this->db->execute();
+        }
+
          public function deleteFlight(){
             if (isset($_POST['delete'])){
                 $id = $_POST['id_vol'];
+                // echo " test delete $id"; 
                 $this->flightModel->deleteFlight($id);
             }
          }
@@ -93,5 +111,6 @@
                 $this->flightModel->deleteFlight($id);
             }
          }
+
     } 
 ?>

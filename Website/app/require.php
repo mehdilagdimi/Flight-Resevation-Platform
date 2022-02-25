@@ -6,6 +6,7 @@
     require_once 'lib/Model.php';
 
     require_once 'config/config.php';
+
     //instantiate core class
     
     $init = new Core();

@@ -10,7 +10,7 @@
         }
 
         public function deleteAirport($airportID){
-            $this->db->query("DELETE FROM airports WHERE id='$airportID'");
+            $this->db->query("DELETE FROM $this->table WHERE airportID='$airportID'");
             $this->db->execute();
          }
     }

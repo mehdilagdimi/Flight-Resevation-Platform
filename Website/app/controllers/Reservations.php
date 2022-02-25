@@ -42,6 +42,7 @@
                 $id = $_POST['id_reserv'];
                 $this->reservModel->deleteReserv($id);
             }
-         }
+        }
+
     }
 ?>
