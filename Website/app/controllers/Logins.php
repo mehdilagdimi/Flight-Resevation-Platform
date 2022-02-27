@@ -28,21 +28,25 @@
                 // echo 'hello';
                 // echo $_POST['email']; 
                 // echo (isset($_POST['email']));
-                $user; 
-                $header;
+                // $user; 
+                // $header;
                 if(isset($_POST['email'])){
                     // echo 'test';
                     if(!empty($checkAdmin = $this->adminModel->getAdmin($_POST['email'], $_POST['passw']))){ 
                         // echo 'inside admin test';
                         $user = 'admin'; 
-                        $header = 'dashboard/index';
-                       $this->login($user, $header);
+                        $userID = $checkAdmin[0]->adminID;
+                        // $header = 'dashboard/index';
+                       $this->login($user, $userID);
 
                     } elseif (!empty($checkUser = $this->userModel->getUser($_POST['email'], $_POST['passw']))){
                         // echo 'inside user test';
-                        $user = 'user'; 
-                        $header = 'pages/index';
-                        $this->login($user, $header);
+                        $user = 'user';
+                        // echo $checkUser[0]->userID;
+                        $userID = $checkUser[0]->userID; 
+                        // echo $userID;
+                        // $header = 'pages/index';
+                        $this->login($user, $userID);
 
                     } else {
                         $_SESSION['loggedIn'] = false;
@@ -56,12 +60,13 @@
                 }
              }
 
-             public function login($user, $header){
+             public function login($user, $userID){
                         session_start();
                         // echo 'hello';
                         $_SESSION['privilege'] = $user;
                         $_SESSION["$user"] = $_POST['email'];
                         $_SESSION['loggedIn'] = true;  
+                        $_SESSION['userID'] = $userID;
 
                         // $flights = $this->flightModel->getFlights();
                         // $planes = $this->planeModel->getPlanes();

@@ -22,6 +22,13 @@
             return $result;
         }
 
+        public function getRecordHighestID($id){
+            $this->db->query("SELECT * FROM $this->table WHERE $id = (SELECT max($id) FROM $this->table)");
+            $record = $this->db->single();
+            $maxID = $record->$id;
+            return $maxID;
+        }
+
         // public function addRecord($constraints_arr){
         //     $this->db->query("INSERT INTO ")
         // }

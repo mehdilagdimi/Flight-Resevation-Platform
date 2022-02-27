@@ -22,8 +22,8 @@
             $this->db->execute();
         }
 
-        public function updateFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price){
-            $this->db->query("UPDATE $this->table SET planeID = '$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price' WHERE id='$volID'");
+        public function updateFlight($volID, $planeID, $departureDate, $arrivalDate, $availableSeats, $price){
+            $this->db->query("UPDATE $this->table SET planeID='$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price' WHERE volID='$volID'");
             $this->db->execute();
         }
 
@@ -31,15 +31,10 @@
                 // echo 'inside addflight in FLight model';
                 $this->db->query("INSERT INTO $this->table (planeID, departureDate, arrivalDate, availableSeats, price) VALUES ('$planeID', '$departureDate', '$arrivalDate', '$availableSeats', '$price') ");
                 $this->db->execute();
-                return $this->getRecordHighestID();
+                $id = 'volID';
+                return $this->getRecordHighestID($id);
             } 
-        public function getRecordHighestID(){
-            $this->db->query("SELECT * FROM $this->table WHERE volID = (SELECT max(volID) FROM $this->table)");
-            $record = $this->db->single();
-            $maxID = $record->volID;
-            return $maxID;
-        }
-
+    
         public function addDeparture($volID, $airportID){
             $this->table = 'departures';
             $this->db->query("INSERT INTO $this->table (volID, airportID) VALUES ('$volID', '$airportID') ");

@@ -25,9 +25,16 @@
             $this->table = 'users';
             return $results;
         }
-        public function getPassengerID(){
-            
+        public function addPassenger($userID, $fName, $lName, $birthDate){
+            $this->table = 'passengers';
+            $this->db->query("INSERT INTO $this->table (userID, fName, lName, birthDate) VALUES ('$userID', '$fName', '$lName', '$birthDate') ");      
+            $this->db->execute();
+            $id = 'passengerID';
+            $passengerID = $this->getRecordHighestID($id);
+            $this->table = 'users';
+            return $passengerID;
         }
+     
         public function addUser($phone, $email, $birthDate, $passw){
             // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
             // return;
