@@ -16,6 +16,14 @@
             return $result;
         }
 
+        public function getTableOrder($id){
+            // $query = "SELECT * FROM " . $table; 
+            $this->db->query("SELECT * FROM " . $this->table . " ORDER BY " . $id);
+            // $this->db->query("SELECT * FROM vols");
+            $result = $this->db->resultSet();
+            return $result;
+        }
+
         public function getSpecific($col, $constraint){
             $this->db->query("SELECT * FROM $this->table WHERE $col = '$constraint'");
             $result = $this->db->resultSet();

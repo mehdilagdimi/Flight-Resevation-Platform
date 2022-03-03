@@ -8,14 +8,19 @@
 
         //default
         public function index(){
-            session_start();
-    
-            if(!$_SESSION['loggedIn']){
-              
-                $this->view('pages/login');
-            }else {
+            // session_start();
+            if(isset($_SESSION['loggedIn'])){
+
+                if(!$_SESSION['loggedIn']){
+                
+                    header("location:" . URLROOT . "logins");
+                }else {
+                    // echo "test";
+                    $this->showReservations();
+                }
+            } else {
                 // echo "test";
-                $this->showReservations();
+                header("location:" . URLROOT . "logins");
             }
         }
            
@@ -25,6 +30,7 @@
             // echo 
             // session_start();
             $reservs = $this->reservModel->getReservs();
+            
             $data = [
                 'title' => 'List of reservations',
                 'reservations' => $reservs 
@@ -48,7 +54,7 @@
 
         public function addReservation(){
            
-            session_start();
+            // session_start();
             // echo $_POST['plane'];
             // echo $_SESSION["privilege"]; 
             if(isset($_SESSION["privilege"]) && isset($_POST['addReservation']) ){
@@ -74,12 +80,12 @@
                         $_SESSION['roundTrip'] = false;
                     }                
                    
-                    $passengerID = $this->userModel->addPassenger($userID, $fName, $lName, $birthDate);
+                    $passengerID = $this->userModel->addPassenger($userID, $volID, $fName, $lName, $birthDate);
                     // echo 'inside addflight in FLights contro';
                     
                     // echo "plane  $planeModel";
                     
-                    $this->reservModel->addReservation($volID, $passengerID, $goingComing, $seatNum);           
+                    $this->reservModel->addReservation($passengerID, $goingComing, $seatNum);           
 
 
                     // $airportID = $this->airportModel->getAirportID($airportTO);

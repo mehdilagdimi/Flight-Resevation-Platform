@@ -5,11 +5,14 @@
 
         public function __construct(){
             parent::__construct();
-            $this->table = 'reservs';
+            // $this->table = 'reservs';
+            $this->table = 'reservations';
         }
         
         public function getReservs(){
-            return $this->getTable();
+            // return $this->getTable();
+            $id = 'reservID';
+            return $this->getTableOrder($id);
         }
 
         public function deleteReserv($reservID){
@@ -19,12 +22,12 @@
 
         public function addReservation($volID, $passengerID, $goingComing, $seatNum){
             // echo $this->table;
-            $this->db->query("INSERT INTO $this->table (volID, passengerID, goingComing, seatNum) VALUES ('$volID', '$passengerID','$goingComing', '$seatNum') ");
+            $this->db->query("INSERT INTO $this->table (passengerID, goingComing, seatNum) VALUES ('$passengerID','$goingComing', '$seatNum') ");
             $this->db->execute();
         }
 
         public function updateReserv($reservID, $volID, $passengerID, $goingComing, $seatNum){     
-            $this->db->query("UPDATE $this->table SET volID='$volID', passengerID ='$passengerID', goingComing='$goingComing', seatNum='$seatNum' WHERE reservID='$reservID'");
+            $this->db->query("UPDATE $this->table SET passengerID ='$passengerID', goingComing='$goingComing', seatNum='$seatNum' WHERE reservID='$reservID'");
             $this->db->execute();
         } 
 

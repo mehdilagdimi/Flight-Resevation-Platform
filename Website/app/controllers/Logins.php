@@ -3,7 +3,7 @@
         // echo $email;
         // echo "hello";
         // echo __FILE__;
-        require_once "Flights.php";
+        // require_once "Flights.php";
 
         class Logins extends Controller{
             
@@ -61,7 +61,7 @@
              }
 
              public function login($user, $userID){
-                        session_start();
+                        // session_start();
                         // echo 'hello';
                         $_SESSION['privilege'] = $user;
                         $_SESSION["$user"] = $_POST['email'];
@@ -73,10 +73,10 @@
                         // $airports = $this->airportModel->getAirports();
                         // $departures = $this->flightModel->getDepartures();
                         // $destinations = $this->flightModel->getDestinations();
-                        $flightsController = new Flights;
+                        // $flightsController = new Flights;
                         // $this->setReadableData();
-                        $flightsController->setReadableData();
-                        
+                        // $flightsController->setReadableData();
+                        header("location:" . URLROOT . "flights/index");
                         // $user = ucwords()
                         // $data = [
                         //     'Session user' => ucwords("$user"),

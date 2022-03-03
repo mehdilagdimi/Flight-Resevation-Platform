@@ -24,7 +24,7 @@
         //default method is index and calling the one we need
         public function index(){
             // $this->showFlights();
-            session_start();
+            // session_start();
             // if(!$_SESSION['loggedIn']){
             //     $this->view('pages/login');
             // }
@@ -32,8 +32,10 @@
                 if($_SESSION['loggedIn'] == true){
                     $this->setReadableData();
                 } else {
-                    $this->view('pages/login');
+                    header("location:" . URLROOT . "logins");
                 }
+            } else {
+                header("location:" . URLROOT . "logins");
             }
         }
 

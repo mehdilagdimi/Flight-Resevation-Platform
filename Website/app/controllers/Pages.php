@@ -13,23 +13,27 @@
             //     'title' => 'Home',
             //     'flights' => $flights
             // ];
-            session_start();   
+            // session_start();   
             if(isset($_SESSION['loggedIn'])){
-                if($_SESSION['privilege'] == 'admin'){
-                    // $this->view('pages/index', $data);
-                    $flightsController = new Flights;
-                    $flightsController->setReadableData();
-                    // $this->view('dashboard/index', $data);
-                    // header ("location : ./../../dashboard/index.php");
-                }
-                if($_SESSION['privilege'] == 'user'){
-                      // $this->view('pages/index', $data);
-                    $flightsController = new Flights;
-                    $flightsController->setReadableData();
-                    // $this->view('pages/index', $data);
+                if($_SESSION['loggedIn']){
+                    // if($_SESSION['privilege'] == 'admin'){
+                        // $this->view('pages/index', $data);
+                        // $flightsController = new Flights;
+                        // $flightsController->setReadableData();
+                        header("location:" . URLROOT . "flights/setReadableData");
+                        // $this->view('dashboard/index', $data);
+                        // header ("location : ./../../dashboard/index.php");
+                    // } else if ($_SESSION['privilege'] == 'user'){
+                        // $this->view('pages/index', $data);
+                        // $flightsController = new Flights;
+                        // $flightsController->setReadableData();
+                        // header("location:" . URLROOT . "flights/setReadableData");
+                        // $this->view('pages/index', $data);
+                    // }
                 }
             } else {
-                $this->view('pages/login');
+                // $this->view('pages/login');
+                $this->login();
             }
         }
         
@@ -42,6 +46,7 @@
 
         public function login(){
             $this->view('pages/login');
+            // header("location:" . URLROOT . "logins");
         }
         
         public function contact(){

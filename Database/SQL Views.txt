@@ -1,0 +1,63 @@
+CREATE VIEW AS V  SELECT r.reservID, r.dateReserv, r.goingComing, r.seatNum, v.departureDate, v.arrivalDate, v.price, p.fName,p.lName FROM
+    reservs r
+  INNER JOIN 
+    vols v 
+  ON
+    r.volID=v.volID
+  INNER JOIN
+    passengers p
+  ON 
+    p.volID=v.volID 
+  INNER JOIN 
+    locationsView l
+  ON
+    l.volID = r.volID
+);
+  ON
+    r.volID=v.volID
+  INNER JOIN
+    passengers p
+  ON 
+    p.volID=v.volID 
+);
+
+//create departures in adress
+CREATE VIEW flightsfromto AS 
+SELECT d.volID, a.airportAdress AS departAirport
+FROM departures d
+INNER JOIN 
+airports a
+ON d.airportID= a.airportID
+//
+CREATE VIEW flightsfromto AS 
+SELECT d.volID, a.airportAdress AS destAirport
+FROM destinations d
+INNER JOIN 
+airports a
+ON d.airportID= a.airportID
+
+CREATE VIEW flightsfromto AS 
+SELECT f.volID, f.departAirport, t.destAirport
+FROM flightsfrom f
+INNER JOIN 
+flightsto t
+ON f.volID= t.volID
+
+//flights tables
+CREATE VIEW flights AS 
+SELECT v.volID, v.departureDate, t.departAirport, t.destAirport, v.arrivalDate, v.price
+FROM vols v
+INNER JOIN 
+flightsfromto t
+ON v.volID= t.volID
+
+//CREATE reservations table
+CREATE VIEW reservations AS
+SELECT r.reservID, p.fName, p.lName, f.departureDate, f.departAirport, f.destAirport, f.arrivalDate, r.dateReserv, r.seatNum, f.price, r.goingComing
+FROM reservs r
+INNER JOIN 
+passengers p
+ON r.volID=p.volID
+INNER JOIN 
+flights f
+ON f.volID=r.volID

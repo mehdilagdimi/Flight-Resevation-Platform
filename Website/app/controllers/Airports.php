@@ -6,15 +6,17 @@
 
     //default method
         public function index(){
-            session_start();
+            // session_start();
             if(isset($_SESSION['loggedIn'])){
                 if(!$_SESSION['loggedIn']){
-                    $this->view('pages/login');
+                    header("location:" . URLROOT . "logins");
                 }
                 if($_SESSION['privilege'] == 'admin'){
                     $this->showAirports();
                 }
-            } 
+            } else {
+                header("location:" . URLROOT . "logins");
+            }
             // else {
             //     $this->view('pages/login');
             // }
