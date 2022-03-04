@@ -91,10 +91,21 @@
              }
              
              public function logout(){
-                session_start();
+                // session_start();
                 session_unset();
                 session_destroy();
-                setcookie('localthost', time() - 3600);
+                if(isset($_COOKIE)){
+                    // unset($_COOKIE);
+                    // var_dump($_COOKIE);
+                // $_COOKIE = empty($_COOKIE);
+
+                    foreach($_COOKIE as $key => $val){
+                        unset($_COOKIE[$key]);
+                        echo $key;
+                        setcookie($key, null, -1, '/');
+                    }
+                }
+
                 header("location:" . URLROOT . "logins"); 
                 // $this->view('pages/login');
              }

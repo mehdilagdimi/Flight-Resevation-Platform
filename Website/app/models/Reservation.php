@@ -20,13 +20,13 @@
             $this->db->execute();
         }
 
-        public function addReservation($volID, $passengerID, $goingComing, $seatNum){
+        public function addReservation($passengerID, $goingComing, $seatNum){
             // echo $this->table;
             $this->db->query("INSERT INTO $this->table (passengerID, goingComing, seatNum) VALUES ('$passengerID','$goingComing', '$seatNum') ");
             $this->db->execute();
         }
 
-        public function updateReserv($reservID, $volID, $passengerID, $goingComing, $seatNum){     
+        public function updateReserv($reservID, $passengerID, $goingComing, $seatNum){     
             $this->db->query("UPDATE $this->table SET passengerID ='$passengerID', goingComing='$goingComing', seatNum='$seatNum' WHERE reservID='$reservID'");
             $this->db->execute();
         } 

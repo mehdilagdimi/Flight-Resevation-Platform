@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2022 at 01:18 PM
+-- Generation Time: Mar 04, 2022 at 08:05 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -208,17 +208,6 @@ INSERT INTO `planes` (`planeID`, `model`, `seats`) VALUES
 -- (See below for the actual view)
 --
 CREATE TABLE `reservations` (
-`reservID` int(11)
-,`fName` varchar(50)
-,`lName` varchar(50)
-,`departureDate` timestamp
-,`departAirport` varchar(100)
-,`destAirport` varchar(100)
-,`arrivalDate` timestamp
-,`dateReserv` timestamp
-,`seatNum` int(11)
-,`price` float
-,`goingComing` varchar(20)
 );
 
 -- --------------------------------------------------------
@@ -229,7 +218,6 @@ CREATE TABLE `reservations` (
 
 CREATE TABLE `reservs` (
   `reservID` int(11) NOT NULL,
-  `volID` int(11) DEFAULT NULL,
   `passengerID` int(11) DEFAULT NULL,
   `dateReserv` timestamp NOT NULL DEFAULT current_timestamp(),
   `goingComing` varchar(20) NOT NULL DEFAULT 'Going',
@@ -240,9 +228,9 @@ CREATE TABLE `reservs` (
 -- Dumping data for table `reservs`
 --
 
-INSERT INTO `reservs` (`reservID`, `volID`, `passengerID`, `dateReserv`, `goingComing`, `seatNum`) VALUES
-(1, 2, 2, '2022-02-21 18:01:56', 'Going', 4),
-(2, 1, 1, '2022-02-21 18:01:56', 'Going', 6);
+INSERT INTO `reservs` (`reservID`, `passengerID`, `dateReserv`, `goingComing`, `seatNum`) VALUES
+(1, 2, '2022-02-21 18:01:56', 'Going', 4),
+(2, 1, '2022-02-21 18:01:56', 'Going', 6);
 
 -- --------------------------------------------------------
 
@@ -387,7 +375,6 @@ ALTER TABLE `planes`
 --
 ALTER TABLE `reservs`
   ADD PRIMARY KEY (`reservID`),
-  ADD KEY `volID` (`volID`),
   ADD KEY `passengerID` (`passengerID`);
 
 --
@@ -423,7 +410,7 @@ ALTER TABLE `airports`
 -- AUTO_INCREMENT for table `passengers`
 --
 ALTER TABLE `passengers`
-  MODIFY `passengerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `passengerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `planes`
@@ -477,7 +464,6 @@ ALTER TABLE `passengers`
 -- Constraints for table `reservs`
 --
 ALTER TABLE `reservs`
-  ADD CONSTRAINT `reservs_ibfk_1` FOREIGN KEY (`volID`) REFERENCES `vols` (`volID`) ON DELETE CASCADE,
   ADD CONSTRAINT `reservs_ibfk_2` FOREIGN KEY (`passengerID`) REFERENCES `passengers` (`passengerID`) ON DELETE CASCADE;
 
 --

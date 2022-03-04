@@ -50,7 +50,11 @@
             $this->table = 'vols';
             // return $result;
         }
-
+        // public function getNumSeats(){
+        //     $this->db->query("INSERT INTO $this->table (volID, airportID) VALUES ('$volID', '$airportID') ");
+        //     $record = $this->db->single();
+        //     return $record->col;
+        // }
         public function getDeparture($volID, $airportID){
             $this->table = 'departures';
             $result = $this->getSpecific($volID, $airportID);
