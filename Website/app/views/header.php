@@ -5,21 +5,22 @@
             <div class=" container-fluid">
             <!-- <a href="#" class="navbar-brand mx-auto">RDA</a> -->
             <div class="d-flex text-primary">
-                <a href="#" class="text-decoration-none fs-2">
+                <a href="<?= URLROOT . '/flights/index'?>" class="text-decoration-none fs-2">
                     <!-- <img class="img-fluid -white w-100 h-100" src="<?= URLROOT . '/public/img/logo.svg' ?>" class="fs-6 m-0"> -->
                     <i class="fas fa-globe-africa"></i>
                 </a>
-                <div class="fs-4" >Air Travel</div>
+                <a class="text-decoration-none fs-4" href="<?= URLROOT . '/flights/index'?>">Air Travel</div></a>
+
             </div>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-between " id="navbarCollapse">
-                <div class="navbar-nav fs-6 fw-bold mx-auto justify-content-evenly">
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav fs-6 fw-bold mx-auto align-items-center">
                     <!-- <a href="./index.html" class="nav-item nav-link">Home</a> -->
-                    <a href="#" class="nav-item nav-link">BOOK FLIGHT</a>
-                    <a href="#" class="nav-item nav-link">MY RESERVATIONS</a>
-                    <a href="#" class="nav-item nav-link">LOGOUT</a>
+                    <a href="<?= URLROOT . '/flights/index' ?>" class="nav-item nav-link text-center">BOOK FLIGHT</a>
+                    <a href="<?= URLROOT . '/reservations' ?>" class="nav-item nav-link text-center">MY RESERVATIONS</a>
+                    <a href="<?= URLROOT . '/logins/logout' ?>" class="nav-item nav-link text-center">LOGOUT</a>
 
                     <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     <!-- <div class="nav-item dropdown">

@@ -55,11 +55,11 @@
                                 <div class="d-flex flex-row justify-content-between p-1">
                                     <form class="" action="<?= URLROOT ?>flights/updateFlight" method="POST">
                                         <input type="text" name="id_reserv" hidden value="<?= $reservation->reservID; ?>">
-                                        <button class="btn btn-outline-secondary mx-2" name="update" style="">DETAILS</button>
+                                        <button class="btn btn-outline-secondary mx-2" name="update">DETAILS</button>
                                     </form>
                                     <form class="" action="<?= URLROOT ?>flights/deleteFlight" method="POST">
                                         <input type="text" name="id_reserv" hidden value="<?= $reservation->reservID; ?>">
-                                        <button class="btn btn-outline-danger mx-2" name="delete" style="">CANCEL</button>
+                                        <button class="btn btn-outline-danger mx-2" name="delete">CANCEL</button>
                                     </form>
                                 </div>
                             </td>

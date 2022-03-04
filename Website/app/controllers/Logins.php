@@ -94,6 +94,7 @@
                 session_start();
                 session_unset();
                 session_destroy();
+                setcookie('localthost', time() - 3600);
                 header("location:" . URLROOT . "logins"); 
                 // $this->view('pages/login');
              }
