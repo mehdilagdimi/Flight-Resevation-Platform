@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2022 at 10:11 AM
+-- Generation Time: Mar 04, 2022 at 01:18 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -84,7 +84,9 @@ CREATE TABLE `departures` (
 
 INSERT INTO `departures` (`volID`, `airportID`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(3, 2),
+(31, 2);
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,58 @@ CREATE TABLE `destinations` (
 
 INSERT INTO `destinations` (`volID`, `airportID`) VALUES
 (1, 3),
-(2, 1);
+(2, 1),
+(3, 2),
+(31, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `flights`
+-- (See below for the actual view)
+--
+CREATE TABLE `flights` (
+`volID` int(11)
+,`departureDate` timestamp
+,`departAirport` varchar(100)
+,`destAirport` varchar(100)
+,`arrivalDate` timestamp
+,`price` float
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `flightsfrom`
+-- (See below for the actual view)
+--
+CREATE TABLE `flightsfrom` (
+`volID` int(11)
+,`departAirport` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `flightsfromto`
+-- (See below for the actual view)
+--
+CREATE TABLE `flightsfromto` (
+`volID` int(11)
+,`departAirport` varchar(100)
+,`destAirport` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `flightsto`
+-- (See below for the actual view)
+--
+CREATE TABLE `flightsto` (
+`volID` int(11)
+,`destAirport` varchar(100)
+);
 
 -- --------------------------------------------------------
 
@@ -114,6 +167,7 @@ INSERT INTO `destinations` (`volID`, `airportID`) VALUES
 CREATE TABLE `passengers` (
   `passengerID` int(11) NOT NULL,
   `userID` int(11) DEFAULT NULL,
+  `volID` int(11) NOT NULL,
   `fName` varchar(50) NOT NULL,
   `lName` varchar(50) NOT NULL,
   `birthDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -123,9 +177,9 @@ CREATE TABLE `passengers` (
 -- Dumping data for table `passengers`
 --
 
-INSERT INTO `passengers` (`passengerID`, `userID`, `fName`, `lName`, `birthDate`) VALUES
-(1, 1, 'User1', 'User1LASTNAME', '2022-02-21 18:00:33'),
-(2, 2, 'User2', 'User2LASTNAME', '2022-02-21 18:00:33');
+INSERT INTO `passengers` (`passengerID`, `userID`, `volID`, `fName`, `lName`, `birthDate`) VALUES
+(1, 1, 1, 'User1', 'User1LASTNAME', '2022-03-02 19:42:47'),
+(2, 2, 2, 'User2', 'User2LASTNAME', '2022-03-02 19:45:51');
 
 -- --------------------------------------------------------
 
@@ -146,6 +200,26 @@ CREATE TABLE `planes` (
 INSERT INTO `planes` (`planeID`, `model`, `seats`) VALUES
 (1, 'Boeing 737', 700),
 (2, 'Airbus A319', 132);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `reservations`
+-- (See below for the actual view)
+--
+CREATE TABLE `reservations` (
+`reservID` int(11)
+,`fName` varchar(50)
+,`lName` varchar(50)
+,`departureDate` timestamp
+,`departAirport` varchar(100)
+,`destAirport` varchar(100)
+,`arrivalDate` timestamp
+,`dateReserv` timestamp
+,`seatNum` int(11)
+,`price` float
+,`goingComing` varchar(20)
+);
 
 -- --------------------------------------------------------
 
@@ -191,7 +265,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userID`, `phone`, `email`, `birthDate`, `passw`, `createdAt`) VALUES
 (1, '0808', 'user1@gmail.com', '2022-02-20 13:26:23', '0000', '2022-02-20 13:26:23'),
-(2, '0909', 'user2@gmail.com', '2022-02-20 13:26:23', '1111', '2022-02-20 13:26:23');
+(2, '0909', 'user2@gmail.com', '2022-02-20 13:26:23', '1111', '2022-02-20 13:26:23'),
+(3, '099999', 'testsignup@gmail.com', '2022-02-09 23:00:00', '123', '2022-02-23 10:35:22');
 
 -- --------------------------------------------------------
 
@@ -206,17 +281,63 @@ CREATE TABLE `vols` (
   `arrivalDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `availableSeats` int(11) NOT NULL,
   `price` float DEFAULT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  `state` varchar(20) DEFAULT NULL
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vols`
 --
 
-INSERT INTO `vols` (`volID`, `planeID`, `departureDate`, `arrivalDate`, `availableSeats`, `price`, `createdAt`, `state`) VALUES
-(1, 1, '2022-02-20 18:55:52', '2022-02-25 18:54:50', 700, 600, '2022-02-20 18:55:52', 'going'),
-(2, 2, '2022-02-20 18:55:52', '2022-02-23 18:54:50', 132, 468.7, '2022-02-20 18:55:52', 'going');
+INSERT INTO `vols` (`volID`, `planeID`, `departureDate`, `arrivalDate`, `availableSeats`, `price`, `createdAt`) VALUES
+(1, 1, '2022-02-20 18:55:52', '2022-02-25 18:54:50', 700, 600, '2022-02-20 18:55:52'),
+(2, 2, '2022-02-20 18:55:52', '2022-02-23 18:54:50', 132, 468.7, '2022-02-20 18:55:52'),
+(3, 1, '2022-02-25 18:55:52', '2022-02-26 18:54:50', 700, 500, '2022-02-20 18:55:52'),
+(31, 1, '2022-02-25 21:34:00', '2022-02-26 21:33:00', 567, 787, '2022-02-25 16:29:22');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `flights`
+--
+DROP TABLE IF EXISTS `flights`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `flights`  AS SELECT `v`.`volID` AS `volID`, `v`.`departureDate` AS `departureDate`, `t`.`departAirport` AS `departAirport`, `t`.`destAirport` AS `destAirport`, `v`.`arrivalDate` AS `arrivalDate`, `v`.`price` AS `price` FROM (`vols` `v` join `flightsfromto` `t` on(`v`.`volID` = `t`.`volID`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `flightsfrom`
+--
+DROP TABLE IF EXISTS `flightsfrom`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `flightsfrom`  AS SELECT `d`.`volID` AS `volID`, `a`.`airportAdress` AS `departAirport` FROM (`departures` `d` join `airports` `a` on(`d`.`airportID` = `a`.`airportID`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `flightsfromto`
+--
+DROP TABLE IF EXISTS `flightsfromto`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `flightsfromto`  AS SELECT `f`.`volID` AS `volID`, `f`.`departAirport` AS `departAirport`, `t`.`destAirport` AS `destAirport` FROM (`flightsfrom` `f` join `flightsto` `t` on(`f`.`volID` = `t`.`volID`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `flightsto`
+--
+DROP TABLE IF EXISTS `flightsto`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `flightsto`  AS SELECT `d`.`volID` AS `volID`, `a`.`airportAdress` AS `destAirport` FROM (`destinations` `d` join `airports` `a` on(`d`.`airportID` = `a`.`airportID`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `reservations`
+--
+DROP TABLE IF EXISTS `reservations`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reservations`  AS SELECT `r`.`reservID` AS `reservID`, `p`.`fName` AS `fName`, `p`.`lName` AS `lName`, `f`.`departureDate` AS `departureDate`, `f`.`departAirport` AS `departAirport`, `f`.`destAirport` AS `destAirport`, `f`.`arrivalDate` AS `arrivalDate`, `r`.`dateReserv` AS `dateReserv`, `r`.`seatNum` AS `seatNum`, `f`.`price` AS `price`, `r`.`goingComing` AS `goingComing` FROM ((`reservs` `r` join `passengers` `p` on(`r`.`volID` = `p`.`volID`)) join `flights` `f` on(`f`.`volID` = `r`.`volID`)) ;
 
 --
 -- Indexes for dumped tables
@@ -253,7 +374,7 @@ ALTER TABLE `destinations`
 --
 ALTER TABLE `passengers`
   ADD PRIMARY KEY (`passengerID`),
-  ADD KEY `userID` (`userID`);
+  ADD KEY `passengers_ibfk_1` (`userID`);
 
 --
 -- Indexes for table `planes`
@@ -302,7 +423,7 @@ ALTER TABLE `airports`
 -- AUTO_INCREMENT for table `passengers`
 --
 ALTER TABLE `passengers`
-  MODIFY `passengerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `passengerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `planes`
@@ -314,19 +435,19 @@ ALTER TABLE `planes`
 -- AUTO_INCREMENT for table `reservs`
 --
 ALTER TABLE `reservs`
-  MODIFY `reservID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `reservID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vols`
 --
 ALTER TABLE `vols`
-  MODIFY `volID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `volID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -350,7 +471,7 @@ ALTER TABLE `destinations`
 -- Constraints for table `passengers`
 --
 ALTER TABLE `passengers`
-  ADD CONSTRAINT `passengers_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `passengers_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reservs`
