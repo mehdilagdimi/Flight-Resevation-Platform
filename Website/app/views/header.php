@@ -1,21 +1,25 @@
-<div class="container-fluid bg-dark">
+<div class="container-fluid bg-light">
     <!-- NAV BAR -->
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-text navbar-dark"">
-                <div class=" container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-text bg-light navbar-light"">
+            <div class=" container-fluid">
             <!-- <a href="#" class="navbar-brand mx-auto">RDA</a> -->
-            <a href="#" class="text-decoration-none">
-                <img class="img-fluid" src="<?= URLROOT . '/public/img/logo final.svg' ?>" class="fs-6 m-0">
-            </a>
+            <div class="d-flex text-primary">
+                <a href="#" class="text-decoration-none fs-2">
+                    <!-- <img class="img-fluid -white w-100 h-100" src="<?= URLROOT . '/public/img/logo.svg' ?>" class="fs-6 m-0"> -->
+                    <i class="fas fa-globe-africa"></i>
+                </a>
+                <div class="fs-4" >Air Travel</div>
+            </div>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between " id="navbarCollapse">
-                <div class="navbar-nav fs-5 mx-auto justify-content-evenly">
-                    <a href="./index.html" class="nav-item nav-link">Home</a>
-                    <a href="#" class="nav-item nav-link active">Team Members</a>
-                    <a href="#" class="nav-item nav-link">Services</a>
-                    <a href="#" class="nav-item nav-link">Business Plan</a>
+                <div class="navbar-nav fs-6 fw-bold mx-auto justify-content-evenly">
+                    <!-- <a href="./index.html" class="nav-item nav-link">Home</a> -->
+                    <a href="#" class="nav-item nav-link">BOOK FLIGHT</a>
+                    <a href="#" class="nav-item nav-link">MY RESERVATIONS</a>
+                    <a href="#" class="nav-item nav-link">LOGOUT</a>
 
                     <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     <!-- <div class="nav-item dropdown">

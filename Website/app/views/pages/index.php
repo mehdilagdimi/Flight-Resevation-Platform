@@ -21,13 +21,14 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
+    <script src="https://kit.fontawesome.com/c4254e24a8.js"></script> -->
+    <?php require_once APPROOT . '/views/styling.php' ?>
 </head>
 
 <body>
-
+    <?php require_once APPROOT . '/views/header.php'; ?>
 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -94,52 +95,58 @@
             </div>
         </div>
     </div>
-    <table class="table table-dark table-hover text-center">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Date</th>
-                <th scope="col">Departure</th>
-                <th scope="col">Destination</th>
-                <th scope="col">Arrival Date</th>
-                <th scope="col">Available Seats</th>
-                <th scope="col">Plane</th>
-                <th scope="col">Price</th>
-                <th scopre="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($data['flights'] as $flight) { ?>
-                <tr id="<?php echo $flight->volID; ?>">
-                    <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>
-                    <td><?= $flight->departureAdress; ?></td>
-                    <td><?= $flight->destinationAdress; ?></td>
-                    <td><?= $flight->departureDate; ?></td>
-                    <td><?= $flight->arrivalDate; ?></td>
-                    <td><?= $flight->availableSeats; ?></td>
-                    <td><?= $flight->plane; ?></td>
-                    <td><?= $flight->price; ?>DHs</td>
-                    <td>
-                        <div class="d-flex flex-row justify-content-between">
-                            <!-- ADD RESERVATION POP UP  -->
-                            <!-- Button trigger modal -->
-                            <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
-                            <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID; ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
-                            <!-- Modal -->
-                            <!-- add a button for cancelling reservation -->
-                            <!-- <form class="" action="" method="POST">
+
+    <div class="container-fluid gradient p-2">
+        <div class="container">
+            <table class="table table-dark table-hover text-center my-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Departure</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Arrival Date</th>
+                        <th scope="col">Available Seats</th>
+                        <th scope="col">Plane</th>
+                        <th scope="col">Price</th>
+                        <th scopre="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data['flights'] as $flight) { ?>
+                        <tr id="<?php echo $flight->volID; ?>">
+                            <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>
+                            <td><?= $flight->departureAdress; ?></td>
+                            <td><?= $flight->destinationAdress; ?></td>
+                            <td><?= $flight->departureDate; ?></td>
+                            <td><?= $flight->arrivalDate; ?></td>
+                            <td><?= $flight->availableSeats; ?></td>
+                            <td><?= $flight->plane; ?></td>
+                            <td><?= $flight->price; ?>DHs</td>
+                            <td>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <!-- ADD RESERVATION POP UP  -->
+                                    <!-- Button trigger modal -->
+                                    <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
+                                    <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID; ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
+                                    <!-- Modal -->
+                                    <!-- add a button for cancelling reservation -->
+                                    <!-- <form class="" action="" method="POST">
                                 <input type="text" name="id_vol" hidden value="">
                                 <button class="btn btn-warning" name="cancel" style="">CENCEL</button>
                             </form> -->
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
 
-    </table>
-    </form>
+            </table>
+            </form>
+        </div>
+    </div>
 
+    <?php require_once APPROOT . '/views/footer.php' ?>
     <script>
         // let reserve = document.querySelectorAll('.reserve');
         // reserve.forEach(addEvent);
@@ -156,13 +163,13 @@
 
         // let reserve = document.querySelectorAll('.reserve');
         let resr = document.querySelectorAll('.reserve');
-        resr.forEach(function(resr){
+        resr.forEach(function(resr) {
             resr.addEventListener('click', setVolID, false);
             resr.volID = resr.value;
             // console.log(resr.volID);
             // console.log(resr.value);
         })
-        
+
 
         function setVolID(evt) {
             // console.log(document.querySelector('.volID').name);
@@ -174,7 +181,7 @@
         //     element.addEventListener('click', function() {
         //         var hello = element.dataset.id.value;
         //         console.log(hello);
-              
+
         //         document.querySelector('.volID').value = element.dataset.id;
         //     })
 
