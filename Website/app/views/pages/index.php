@@ -102,14 +102,14 @@
                 <thead>
                     <tr>
                         <!-- <th scope="col">#</th> -->
-                        <th scope="col">Date</th>
-                        <th scope="col">Departure</th>
-                        <th scope="col">Destination</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Departure Date</th>
                         <th scope="col">Arrival Date</th>
                         <th scope="col">Available Seats</th>
                         <th scope="col">Plane</th>
                         <th scope="col">Price</th>
-                        <th scopre="col">Actions</th>
+                        <th scopre="col"></th>
                     </tr>
                 </thead>
                 <tbody>

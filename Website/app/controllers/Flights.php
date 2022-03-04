@@ -49,12 +49,14 @@
             ];
             
             // $this->view('pages/index', $data);
-            if($_SESSION['privilege'] == 'admin'){
-                $this->view('dashboard/index', $data);
-            } else {
-                $this->view('pages/index', $data);
-            }
+            if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true ){
 
+                    if($_SESSION['privilege'] == 'admin'){
+                        $this->view('dashboard/index', $data);
+                    } else {
+                        $this->view('pages/index', $data);
+                    }
+            }
         }
 
 

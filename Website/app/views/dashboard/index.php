@@ -156,7 +156,7 @@
             <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>                      
+                        <!-- <th scope="col">#</th>                       -->
                         <th scope="col">FROM</th>
                         <th scope="col">TO</th>
                         <th scope="col">Departure</th>
@@ -170,7 +170,7 @@
                 <tbody>
                     <?php foreach ($data['flights'] as $flight) { ?>
                         <tr id="<?php echo $flight->volID; ?>">
-                            <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>                          
+                            <!-- <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>                           -->
                             <td><?= $flight->departureAdress; ?></td>
                             <td><?= $flight->destinationAdress; ?></td>
                             <td><?= $flight->departureDate; ?></td>

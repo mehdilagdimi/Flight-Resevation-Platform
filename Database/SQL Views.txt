@@ -52,12 +52,14 @@ flightsfromto t
 ON v.volID= t.volID
 
 //CREATE reservations table
+
+
 CREATE VIEW reservations AS
 SELECT r.reservID, p.fName, p.lName, f.departureDate, f.departAirport, f.destAirport, f.arrivalDate, r.dateReserv, r.seatNum, f.price, r.goingComing
 FROM reservs r
 INNER JOIN 
 passengers p
-ON r.volID=p.volID
+ON r.passengerID=p.passengerID
 INNER JOIN 
 flights f
-ON f.volID=r.volID
+ON f.volID=p.volID

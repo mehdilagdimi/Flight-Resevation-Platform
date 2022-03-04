@@ -6,12 +6,15 @@
         public function __construct(){
             parent::__construct();
             // $this->table = 'reservs';
-            $this->table = 'reservations';
+            $this->table = 'reservs';
+            // $this->view = 'reservations';
         }
         
         public function getReservs(){
             // return $this->getTable();
             $id = 'reservID';
+            // echo $this->table;
+            $this->table = 'reservations';
             return $this->getTableOrder($id);
         }
 

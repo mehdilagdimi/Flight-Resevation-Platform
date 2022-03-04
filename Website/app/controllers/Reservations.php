@@ -37,12 +37,14 @@
                 'reservations' => $reservs 
             ];
             //  echo $_SESSION['privilege'];
-            if($_SESSION['privilege'] == 'admin'){
-                $this->view('dashboard/showReservations', $data);
-                // echo 'test';
-            } else {
-                // echo "user reservations view";
-                $this->view('pages/reservations', $data);
+            if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE){
+                if($_SESSION['privilege'] == 'admin'){
+                    $this->view('dashboard/showReservations', $data);
+                    // echo 'test';
+                } else {
+                    // echo "user reservations view";
+                    $this->view('pages/reservations', $data);
+                }
             }
         }
 

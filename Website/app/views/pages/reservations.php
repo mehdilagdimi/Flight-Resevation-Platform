@@ -29,10 +29,9 @@
                         <th scope="col">Arrival Date</th>
                         <th scope="col">Seat Number</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Seat Number</th>
                         <th scope="col">Going / Coming</th>
                         <th scope="col">Date of Reservation</th>
-                        <!-- <th scopre="col"></th> -->
+                        <th scopre="col"></th>
                     </tr>
                 </thead>
                 <tbody>

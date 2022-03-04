@@ -18,9 +18,9 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav fs-6 fw-bold mx-auto align-items-center">
                     <!-- <a href="./index.html" class="nav-item nav-link">Home</a> -->
-                    <a href="<?= URLROOT . 'flights/index' ?>" class="nav-item nav-link text-center">BOOK FLIGHT</a>
-                    <a href="<?= URLROOT . 'reservations' ?>" class="nav-item nav-link text-center">MY RESERVATIONS</a>
-                    <a href="<?= URLROOT . 'logins/logout' ?>" class="nav-item nav-link text-center">LOGOUT</a>
+                    <a href="<?= URLROOT . 'flights/index' ?>" class="nav-item nav-link text-center text-primary">BOOK FLIGHT</a>
+                    <a href="<?= URLROOT . 'reservations' ?>" class="nav-item nav-link text-center text-primary">MY RESERVATIONS</a>
+                    <a href="<?= URLROOT . 'logins/logout' ?>" class="nav-item nav-link text-center text-primary">LOGOUT</a>
 
                     <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     <!-- <div class="nav-item dropdown">
