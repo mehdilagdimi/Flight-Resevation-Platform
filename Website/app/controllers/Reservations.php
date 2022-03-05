@@ -66,44 +66,52 @@
                     //verify availabel seats
                     $flight = $this->flightModel->getSpecific('volID', $volID);
                     $numOfReserv = 1; //default is one, otherwise it is dependant on how many reservation the user wants to book
-                    echo $flight[0]->availableSeats;
-                    if($flight[0]->availableSeats == 0 ){
-                        $_POST = [];
-                        echo "No seat is available on this flight. Choose another one";
-                        return;
+                    // echo $flight[0]->availableSeats;
+                    $availableSeats = $flight[0]->availableSeats;
+                    if($availableSeats < $numOfReserv){
+                        if($availableSeats == 0){
+                            echo "No seat is available on this flight. Choose another one";
+                            $_POST = [];
+                            return;
+                        }
+                        else {
+                            echo "Only $availableSeats seats are available on this flight. $availableSeats reservations will be created"; 
+                        }
+    
                     }
                     // echo "hello";
                     // echo $volID;
-                    else { for($i = 0; $i <=  $numOfReserv; $i++)
-                        $userID = $_SESSION['userID']; // set this when logging in => change logins controller
-                        $volID = $_POST['volID'];
-                        $fName = $_POST['fName'];
-                        $lName =  $_POST['lName'];
-                        $birthDate = $_POST['birthDate'];
-                        $seatNum = $_POST['seatNum'];
-                        // $goingComing =  $_POST['goingComing'] = 'going'; //default value change it dynamically according to form
-                        $goingComing = 'going';
-                        // echo "testing going coming POST" . $_POST['goingComing'];
+                    for($i = 0; $i <=  $numOfReserv; $i++){
+                            $userID = $_SESSION['userID']; // set this when logging in => change logins controller
+                            $volID = $_POST['volID'];
+                            $fName = $_POST['fName'];
+                            $lName =  $_POST['lName'];
+                            $birthDate = $_POST['birthDate'];
+                            $seatNum = $_POST['seatNum'];
+                            // $goingComing =  $_POST['goingComing'] = 'going'; //default value change it dynamically according to form
+                            $goingComing = 'going';
+                            // echo "testing going coming POST" . $_POST['goingComing'];
 
-                        if($_POST['type'] == 'roundTrip'){
-                            // if($_SESSION['roundTrip'] == 'going'){
-                                $_SESSION['roundTrip'] = true;
-                            // }
-                        } else {
-                            $_SESSION['roundTrip'] = false;
-                        }                
-                    
-                        $passengerID = $this->userModel->addPassenger($userID, $volID, $fName, $lName, $birthDate);
-                        // echo 'inside addflight in FLights contro';
-                        
-                        // echo "plane  $planeModel";
-                        
-                        $this->reservModel->addReservation($passengerID, $goingComing, $seatNum);           
+                            if($_POST['type'] == 'roundTrip'){
+                                // if($_SESSION['roundTrip'] == 'going'){
+                                    $_SESSION['roundTrip'] = true;
+                                // }
+                            } else {
+                                $_SESSION['roundTrip'] = false;
+                            }                
+                            
+                            $this->flightModel->updateSeatNum($volID, $availableSeats - 1);
 
-                        }
+                            $passengerID = $this->userModel->addPassenger($userID, $volID, $fName, $lName, $birthDate);
+                            // echo 'inside addflight in FLights contro';
+                            
+                            // echo "plane  $planeModel";
+                            
+                            $this->reservModel->addReservation($passengerID, $goingComing, $seatNum);           
+
+                    }
                         // $airportID = $this->airportModel->getAirportID($airportTO);
                         // $this->flightModel->addDestination($volID, $airportID);
-                    }
             }
             $_POST = [];
             

@@ -26,6 +26,10 @@
             $this->db->query("UPDATE $this->table SET planeID='$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price' WHERE volID='$volID'");
             $this->db->execute();
         }
+        public function updateSeatNum($volID, $newAvailableSeats){
+            $this->db->query("UPDATE $this->table SET planeID=planeID, departureDate=departureDate, arrivalDate=arrivalDate, availableSeats='$newAvailableSeats', price=price WHERE volID='$volID'");
+            $this->db->execute();
+        }
 
         public function addFlight($planeID, $departureDate, $arrivalDate, $availableSeats, $price){
                 // echo 'inside addflight in FLight model';
