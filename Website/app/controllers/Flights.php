@@ -30,7 +30,12 @@
             // }
             if(isset($_SESSION['loggedIn'])){
                 if($_SESSION['loggedIn'] == true){
-                    $this->setReadableData();
+                    // $this->setReadableData();
+                    if($_SESSION['privilege'] == 'admin'){
+                        $this->view('dashboard/index');
+                    } else {
+                        $this->view('pages/index');
+                    }
                 } else {
                     header("location:" . URLROOT . "logins");
                 }
@@ -39,23 +44,28 @@
             }
         }
 
-        public function showFlights($flights){
+        public function showFlights(){
             //Display flights
             // $flights = $this->flightModel->getFlights();
-            $data = [
-                'Session user' => ucwords($_SESSION['privilege']),
-                // 'user'  => $checkUser,
-                'flights' => $flights
-            ];
-            
-            // $this->view('pages/index', $data);
             if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true ){
+                // echo $_POST["searchFlights"];
+               
 
-                    if($_SESSION['privilege'] == 'admin'){
-                        $this->view('dashboard/index', $data);
-                    } else {
-                        $this->view('pages/index', $data);
-                    }
+                // $flights = $this->setReadableData();
+                $flights = $this->flightModel->getFlights();
+            
+                $data = [
+                    'Session user' => ucwords($_SESSION['privilege']),
+                    // 'user'  => $checkUser,
+                    'flights' => $flights
+                ];
+                          
+            // $this->view('pages/index', $data);
+                if($_SESSION['privilege'] == 'admin'){
+                    $this->view('dashboard/flights', $data);
+                } else {
+                    $this->view('pages/flights', $data);
+                }
             }
         }
 
@@ -94,7 +104,8 @@
                 }
 
             }
-            $this->showFlights($flights);
+            // $this->showFlights($flights);
+            return $flights;
          }
 
          public function addFlight(){

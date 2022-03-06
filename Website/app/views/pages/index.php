@@ -28,179 +28,61 @@
 </head>
 
 <body>
+
     <?php require_once APPROOT . '/views/header.php'; ?>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">ADD A FLIGHT</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div> -->
-                <div class="modal-body modal-dialog-centered">
-
-                    <form action="<?= URLROOT ?>reservations/addReservation" method="POST">
-                        <!-- 2 column grid layout with text inputs for the first and last names -->
-                        <div class="row mb-4">
-
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="fName"">First Name</label>
-                                <input type=" text" id="fName" name="fName" class="form-control" />
-                            </div>
-
-
-                            <!-- Text input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="lName">Last Name</label>
-                                <input type="text" id="lName" name="lName" class="form-control" />
-
-                            </div>
-
-
-                            <!-- Number input -->
-                            <div class="col">
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="birthDate">BirthDate</label>
-                                    <input type="date" id="birthDate" name="birthDate" class="form-control" />
-
-                                </div>
-
-                                <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <select class="form-select" name="type" aria-label="Default select example">
-                                        <option selected>Type of Flight</option>
-                                        <option value="simpleFlight">Simple Flight</option>
-                                        <option value="roundTrip">Round Trip</option>
-                                    </select>
-                                    <!-- <label class="form-label" for="id_state">Going/Coming</label>
-                                    <input type="text" id="id_state" name="id_state" class="form-control" /> -->
-                                </div>
-                            </div>
-                            <!-- Message input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="seatNum">Seat</label>
-                                <input type="number" id="seatNum" name="seatNum" class="form-control" />
-
-                            </div>
-                            <!-- Submit button -->
-                            <div class="form-outline d-flex flex-row justify-content-end">
-                                <input type="hidden" class="volID" name="volID" value="">
-                                <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" name="addReservation" class="btn btn-success btn-block mx-1">ADD RESERVATION</button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="container-fluid gradient p-4">
+        <div class="container bg-light p-2 text-center align-items-center">
+            <form action="<?= URLROOT . 'flights/showFlights'?>" method="POST" class="row gy-2 gx-3 mb-0 p-2 justify-content-center align-items-center">
+                <div class="col-3">
+                    <div class="form-outline">
+                        <!-- <input type="text" id="form11Example1" class="form-control" /> -->
+                        <label class="form-label" for="form11Example1">Departure</label>
+                        <select class="form-select" name ="departure" aria-label="Default select example">
+                            <option selected></option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
                 </div>
+                <!-- <div class="col-auto">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="form11Example2" checked />
+                        <label class="form-check-label" for="form11Example2"> Checked </label>
+                    </div>
+                </div> -->
+                <div class="col-3">
+                    <div class="form-outline">
+                        <!-- <input type="text" id="form11Example3" class="form-control" /> -->
+                        <label class="form-label" for="form11Example3">Destination</label>
+                        <select class="form-select" name="destination" aria-label="Default select example">
+                            <option selected></option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="col-auto d-flex flex-column align-items-center">
+                        <label class="form-check-label" for="form11Example4">
+                            Round Trip
+                        </label>
+                        <div class="form-check form-switch">
 
-            </div>
+                            <input class="form-check-input" name ="roundTrip" type="checkbox" id="form11Example4" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" name="searchFlights" class="btn btn-primary">Search</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <div class="container-fluid gradient p-2">
-        <div class="container">
-            <table class="table table-responsive table-dark table-hover text-center my-4">
-                <thead>
-                    <tr>
-                        <!-- <th scope="col">#</th> -->
-                        <th scope="col">From</th>
-                        <th scope="col">To</th>
-                        <th scope="col">Departure Date</th>
-                        <th scope="col">Arrival Date</th>
-                        <th scope="col">Available Seats</th>
-                        <th scope="col">Plane</th>
-                        <th scope="col">Price</th>
-                        <th scopre="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($data['flights'] as $flight) { ?>
-                        <tr id="<?php echo $flight->volID; ?>">
-                            <!-- <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th> -->
-                            <td><?= $flight->departureAdress; ?></td>
-                            <td><?= $flight->destinationAdress; ?></td>
-                            <td><?= $flight->departureDate; ?></td>
-                            <td><?= $flight->arrivalDate; ?></td>
-                            <td><?= $flight->availableSeats; ?></td>
-                            <td><?= $flight->plane; ?></td>
-                            <td><?= $flight->price; ?>DHs</td>
-                            <td>
-                                <div class="d-flex flex-row justify-content-between">
-                                    <!-- ADD RESERVATION POP UP  -->
-                                    <!-- Button trigger modal -->
-                                    <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
-                                    <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
-                                    <!-- Modal -->
-                                    <!-- add a button for cancelling reservation -->
-                                    <!-- <form class="" action="" method="POST">
-                                <input type="text" name="id_vol" hidden value="">
-                                <button class="btn btn-warning" name="cancel" style="">CENCEL</button>
-                            </form> -->
-                                </div>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-
-            </table>
-            <!-- </form> -->
-        </div>
-    </div>
-
-    <?php require_once APPROOT . '/views/footer.php' ?>
-
-    <script>
-        // let reserve = document.querySelectorAll('.reserve');
-        // reserve.forEach(addEvent);
-        // function addEvent(row){
-        //     row.addEventListener('click',open(){
-
-        //     });
-        // }
-        // function open(row){
-        // document.querySelector('.volID').value = row.dataset.id.value;
-
-        // }
-
-
-        // let reserve = document.querySelectorAll('.reserve');
-        let resr = document.querySelectorAll('.reserve');
-        resr.forEach(function(resr) {
-            resr.addEventListener('click', setVolID, false);
-            resr.volID = resr.value;
-            // console.log(resr.volID);
-            // console.log(resr.value);
-        })
-
-
-        function setVolID(evt) {
-            // console.log(document.querySelector('.volID').name);
-            document.querySelector('.volID').value = evt.currentTarget.volID;
-            // console.log(document.querySelector('.volID').value);
-        }
-
-        // reserve.forEach(function(element) {
-        //     element.addEventListener('click', function() {
-        //         var hello = element.dataset.id.value;
-        //         console.log(hello);
-
-        //         document.querySelector('.volID').value = element.dataset.id;
-        //     })
-
-        // });
-
-
-        // let reserve = document.querySelectorAll('.reserve');
-        //     reserve.forEach(open);
-        //     // reserve.addEventListener('click', open);
-
-        //     function open(row) {
-        //         row.addEventListener('click', setID(row));
-
-        //     }
-        //     function setID(row){
-        //         document.querySelector('.volID').value = row.value;
-        //     }
-    </script>
 </body>
+<?php require_once APPROOT . '/views/footer.php' ?>
 
 </html>

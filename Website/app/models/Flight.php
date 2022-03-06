@@ -10,6 +10,7 @@
         }
 
         public function getFlights(){
+            $this->table = 'flights';
             return $this->getTable();
         }
 
