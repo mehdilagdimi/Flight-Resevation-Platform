@@ -30,6 +30,23 @@
             return $result;
         }
 
+        public function getSpecificMultiple($constraints){
+            $query = "SELECT * FROM $this->table WHERE ";
+            $numOfConstraints = count($constraints);
+
+            foreach($constraints as $col => $c ){
+                $numOfConstraints--;
+                $query .= "$col = '$c'";
+                if($numOfConstraints > 0){
+                    $query += " AND ";
+                }
+            }
+            $this->db->query($query);
+            $result = $this->db->resultSet();
+            return $result;
+        }
+        
+
         public function getRecordHighestID($id){
             $this->db->query("SELECT * FROM $this->table WHERE $id = (SELECT max($id) FROM $this->table)");
             $record = $this->db->single();

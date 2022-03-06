@@ -50,16 +50,34 @@
             if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true ){
                 // echo $_POST["searchFlights"];
                
-
+                $departure = $_POST['departure'];
+                $destination = $_POST['destination'];
                 // $flights = $this->setReadableData();
-                $flights = $this->flightModel->getFlights();
-            
-                $data = [
+                $constraints = [
+                    'departAirport' => $departure,
+                    'destAirport'  => $destination
+                ];
+                $Gflights = $this->flightModel->getSpecificMultiple( $constraints);
+
+                if(isset($_POST['roundTrip'])){
+                    $Cflights = $this->flightModel->getCflights();  //get coming flights from the destination specified
+                    $data = [
+                        'Session user' => ucwords($_SESSION['privilege']),
+                        // 'user'  => $checkUser,
+                        'roundTrip' => true,
+                        'Goingflights' => $Gflights, //going flights
+                        'Comingflights' => $Cflights // Coming flights
+                    ];
+                } else {
+                    
+                    $data = [
                     'Session user' => ucwords($_SESSION['privilege']),
                     // 'user'  => $checkUser,
-                    'flights' => $flights
-                ];
-                          
+                    'roundTrip' => false,
+                    'Gflights' => $Gflights  //going flights only
+                    ];
+                }
+                           
             // $this->view('pages/index', $data);
                 if($_SESSION['privilege'] == 'admin'){
                     $this->view('dashboard/flights', $data);
@@ -70,54 +88,47 @@
         }
 
 
-        public function setReadableData(){
+        // public function setReadableData(){
 
-            $flights = $this->flightModel->getFlights();
-            $planes = $this->planeModel->getPlanes();
-            $airports = $this->airportModel->getAirports();
-            $departures = $this->flightModel->getDepartures();
-            $destinations = $this->flightModel->getDestinations();
+            // $flights = $this->flightModel->getFlights();
+            // $planes = $this->planeModel->getPlanes();
+            // $airports = $this->airportModel->getAirports();
+            // $departures = $this->flightModel->getDepartures();
+            // $destinations = $this->flightModel->getDestinations();
 
-            foreach ($flights as $flight){
-                foreach($planes as $plane){
-                    if($flight->planeID == $plane->planeID){
-                        $flight->plane = $plane->model;
-                    }
-                }
-                foreach($departures as $departure){
-                    if($flight->volID == $departure->volID){
-                        foreach($airports as $airport){
-                            if($departure->airportID == $airport->airportID){
-                                $flight->departureAdress = $airport->airportAdress;
-                            }
-                        }
-                    }
-                }
-                foreach($destinations as $destination){
-                    if($flight->volID == $destination->volID){
-                        foreach($airports as $airport){
-                            if($destination->airportID == $airport->airportID){
-                                $flight->destinationAdress = $airport->airportAdress;
-                            }
-                        }
-                    }
-                }
+            // foreach ($flights as $flight){
+            //     foreach($planes as $plane){
+            //         if($flight->planeID == $plane->planeID){
+            //             $flight->plane = $plane->model;
+            //         }
+            //     }
+            //     foreach($departures as $departure){
+            //         if($flight->volID == $departure->volID){
+            //             foreach($airports as $airport){
+            //                 if($departure->airportID == $airport->airportID){
+            //                     $flight->departureAdress = $airport->airportAdress;
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     foreach($destinations as $destination){
+            //         if($flight->volID == $destination->volID){
+            //             foreach($airports as $airport){
+            //                 if($destination->airportID == $airport->airportID){
+            //                     $flight->destinationAdress = $airport->airportAdress;
+            //                 }
+            //             }
+            //         }
+            //     }
 
-            }
-            // $this->showFlights($flights);
-            return $flights;
-         }
+            // }
+            // // $this->showFlights($flights);
+            // return $flights;
+        //  }
 
          public function addFlight(){
-            // echo $phone.' | '. $email.' | '. $birthDate.' | '. $passw;
-            // return; //     echo"<pre>";
-            //     print_r($_POST);
-            //     return;
-            // if(){
-           
-            // }
-           
 
+           
             session_start();
             // echo $_POST['plane'];
             // echo $_SESSION["privilege"]; 
