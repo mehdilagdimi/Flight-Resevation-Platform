@@ -82,7 +82,7 @@
                     }
                     // echo "hello";
                     // echo $volID;
-                    for($i = 0; $i <=  $numOfReserv; $i++){
+                    for($i = 0; $i <  $numOfReserv; $i++){
                             $userID = $_SESSION['userID']; // set this when logging in => change logins controller
                             $volID = $_POST['volID'];
                             $fName = $_POST['fName'];

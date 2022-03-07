@@ -17,7 +17,7 @@
     Class Flights extends Planes{
         public function __construct(){
             $this->flightModel = $this->model('Flight');
-            // $this->planeModel = $this->model('Plane');
+            $this->planeModel = $this->model('Plane');
             $this->airportModel = $this->model('Airport');
         }
 
@@ -169,7 +169,7 @@
          public function addFlight(){
 
            
-            session_start();
+            // session_start();
             // echo $_POST['plane'];
             // echo $_SESSION["privilege"]; 
             if(isset($_SESSION["privilege"]) && isset($_POST['saveflight']) ){

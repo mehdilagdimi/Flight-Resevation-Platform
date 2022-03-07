@@ -57,7 +57,7 @@
         }
         public function deletePassenger($id){
             $this->table = 'passengers';
-            $this->db->query("DELETE FROM $this->table WHERE userID='$id'");
+            $this->db->query("DELETE FROM $this->table WHERE passengerID='$id'");
             $this->db->execute();
             $this->table = 'users';
 

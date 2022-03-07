@@ -18,10 +18,11 @@
             return $this->getTableOrder($id);
         }
 
-        public function deleteReserv($reservID){
-            $this->db->query("DELETE FROM $this->table WHERE reservID='$reservID'");
-            $this->db->execute();
-        }
+        // public function deleteReserv($reservID){
+        //     // $reservID = $_POST['id_user'];
+        //     $this->db->query("DELETE FROM $this->table WHERE reservID='$reservID'");
+        //     $this->db->execute();
+        // }
 
         public function addReservation($passengerID, $goingComing, $seatNum){
             // echo $this->table;

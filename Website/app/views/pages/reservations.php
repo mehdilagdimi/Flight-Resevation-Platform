@@ -57,7 +57,7 @@
                                         <button class="btn btn-outline-secondary mx-2" name="update">DETAILS</button>
                                     </form>
                                     <form class="" action="<?= URLROOT ?>users/deletePassenger" method="POST">
-                                        <input type="text" name="id_reserv" hidden value="<?= $reservation->reservID; ?>">
+                                        <input type="text" name="id_passenger" hidden value="<?= $reservation->passengerID; ?>">
                                         <button class="btn btn-outline-danger mx-2" name="cancel">CANCEL</button>
                                     </form>
                                 </div>

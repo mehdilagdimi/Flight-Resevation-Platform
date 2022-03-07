@@ -87,9 +87,9 @@
 
                                 <div class="form-outline mb-4">
 
-                                    <label class="form-label" for="id_plane"">Plane Model</label>
+                                    <label class="form-label" for="plane"">Plane Model</label>
                                     <!-- <input type=" text" id="id_plane" name="plane" class="form-control" /> -->
-                                    <select class="form-select" name ="id_plane" aria-label="Default select example">
+                                    <select class="form-select" name ="plane" aria-label="Default select example">
                                     <option selected></option>
 
                                     <?php foreach($data['planes'] as $plane) { ?>
@@ -178,7 +178,7 @@
             <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
-                        <!-- <th scope="col">#</th>                       -->
+                        <th scope="col">Flight ID</th>                      
                         <th scope="col">FROM</th>
                         <th scope="col">TO</th>
                         <th scope="col">Departure</th>
@@ -193,6 +193,7 @@
                     <?php foreach ($data['flights'] as $flight) { ?>
                         <tr id="<?php echo $flight->volID; ?>">
                             <!-- <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>                           -->
+                            <td><?= $flight->volID; ?></td>
                             <td><?= $flight->departAirport; ?></td>
                             <td><?= $flight->destAirport; ?></td>
                             <td><?= $flight->departureDate; ?></td>

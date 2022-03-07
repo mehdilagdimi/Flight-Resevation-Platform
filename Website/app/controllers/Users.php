@@ -52,9 +52,10 @@
 
         public function deletePassenger(){
             if (isset($_POST['cancel'])){
-                $id = $_POST['id_reserv'];
+                $id = $_POST['id_passenger'];
                 $this->userModel->deletePassenger($id);
             }
+            header("location:" . URLROOT . "reservations");
         }
         public function signup(){
             // echo 'hazma';
