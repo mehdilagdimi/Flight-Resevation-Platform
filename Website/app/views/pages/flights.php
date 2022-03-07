@@ -78,8 +78,10 @@
         </div>
     </div>
 
+    <!-- Flights going to -->
     <div class="container-fluid gradient p-2">
         <div class="container">
+            <h2>----></h2>
             <table class="table table-responsive table-dark table-hover text-center my-4">
                 <thead>
                     <tr>
@@ -128,6 +130,61 @@
         </div>
     </div>
 
+    <!-- Flights coming from -->
+    <?php if(isset($data['Comingflights'])) {?>
+    <div class="container-fluid gradient p-2">
+        <div class="container">
+            <h2><----</h2>
+            <table class="table table-responsive table-dark table-hover text-center my-4">
+                <thead>
+                    <tr>
+                        <!-- <th scope="col">#</th> -->
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Departure Date</th>
+                        <th scope="col">Arrival Date</th>
+                        <th scope="col">Available Seats</th>
+                        <th scope="col">Plane</th>
+                        <th scope="col">Price</th>
+                        <th scopre="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if(isset($data['Comingflights'])){ foreach ($data['Comingflights'] as $flight) { ?>
+                        <tr id="<?php echo $flight->volID; ?>">
+                            <!-- <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th> -->
+                            <td><?= $flight->departAirport; ?></td>
+                            <td><?= $flight->destAirport; ?></td>
+                            <td><?= $flight->departureDate; ?></td>
+                            <td><?= $flight->arrivalDate; ?></td>
+                            <td><?= $flight->availableSeats; ?></td>
+                            <td><?= $flight->model; ?></td>
+                            <td><?= $flight->price; ?>DHs</td>
+                            <td>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <!-- ADD RESERVATION POP UP  -->
+                                    <!-- Button trigger modal -->
+                                    <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
+                                    <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
+                                    <!-- Modal -->
+                                    <!-- add a button for cancelling reservation -->
+                                    <!-- <form class="" action="" method="POST">
+                                <input type="text" name="id_vol" hidden value="">
+                                <button class="btn btn-warning" name="cancel" style="">CENCEL</button>
+                            </form> -->
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } } ?>
+                </tbody>
+
+            </table>
+            <!-- </form> -->
+        </div>
+    </div>
+
+    <?php } ?>
+    
     <script>
         // let reserve = document.querySelectorAll('.reserve');
         // reserve.forEach(addEvent);

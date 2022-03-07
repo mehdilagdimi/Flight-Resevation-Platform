@@ -48,12 +48,13 @@
             }
         }
 
-        public function cancelReservation(){
-            if (isset($_POST['delete'])){
-                $id = $_POST['id_reserv'];
-                $this->reservModel->deleteReserv($id);
-            }
-        }
+        // public function cancelReservation(){
+        //     if (isset($_POST['cancel'])){
+        //         $id = $_POST['id_reserv'];
+        //         // header("location:" . URLROOT . "users/deletePassenger");
+        //         // $this->reservModel->deleteReserv($id);
+        //     }
+        // }
 
         public function addReservation(){
            
@@ -118,6 +119,7 @@
             header("location:" . URLROOT ."reservations/showReservations");
             // $this->setReadableData();
           
+            }
         }
     }
 ?>

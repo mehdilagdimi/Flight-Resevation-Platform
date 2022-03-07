@@ -79,7 +79,7 @@
 
                     ];
                    
-                    $Cflights = $this->flightModel->getSpecificMultiple($constraints);  //get coming flights from the destination specified
+                    $Cflights = $this->flightModel->getSpecificFlights($constraints);  //get coming flights from the destination specified
                     $data = [
                         'Session user' => ucwords($_SESSION['privilege']),
                         // 'user'  => $checkUser,
@@ -96,7 +96,8 @@
                     'Goingflights' => $Gflights  //going flights only
                     ];
                 }
-                // echo "test";
+                // echo $_POST['roundTrip'];
+                // var_dump($data["Goingflights"]);
             // $this->view('pages/index', $data);
                 // if($_SESSION['privilege'] == 'admin'){
                 //     $this->view('dashboard/flights', $data);

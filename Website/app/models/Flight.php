@@ -26,8 +26,8 @@
 
         // }
 
-        public function deleteFlight($planeID){
-            $this->db->query("DELETE FROM $this->table WHERE volID = '$planeID'");
+        public function deleteFlight($volID){
+            $this->db->query("DELETE FROM $this->table WHERE volID = '$volID'");
             $this->db->execute();
         }
 

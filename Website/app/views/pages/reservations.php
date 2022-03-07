@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <!-- <th scope="col">#</th> -->
-                        <th scope="col">Reservation Number</th>
+                        <th scope="col">Reservation ID</th>
                         <!-- <th scope="col">Flight ID</th> -->
                         <th scope="col">Passenger Name</th>
                         <th scope="col">Departure Date</th>
@@ -52,13 +52,13 @@
 
                             <td>
                                 <div class="d-flex flex-row justify-content-between p-1">
-                                    <form class="" action="<?= URLROOT ?>flights/updateFlight" method="POST">
+                                    <form class="" action="<?= URLROOT ?>reservations/details" method="POST">
                                         <input type="text" name="id_reserv" hidden value="<?= $reservation->reservID; ?>">
                                         <button class="btn btn-outline-secondary mx-2" name="update">DETAILS</button>
                                     </form>
-                                    <form class="" action="<?= URLROOT ?>flights/deleteFlight" method="POST">
+                                    <form class="" action="<?= URLROOT ?>users/deletePassenger" method="POST">
                                         <input type="text" name="id_reserv" hidden value="<?= $reservation->reservID; ?>">
-                                        <button class="btn btn-outline-danger mx-2" name="delete">CANCEL</button>
+                                        <button class="btn btn-outline-danger mx-2" name="cancel">CANCEL</button>
                                     </form>
                                 </div>
                             </td>

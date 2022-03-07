@@ -39,10 +39,11 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/c4254e24a8.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"> -->
+    <?php require_once APPROOT . '/views/styling.php' ?>
     <style>
         .gradient-custom {
             /* fallback for old browsers */
@@ -57,8 +58,11 @@
     </style>
 </head>
 
-<body class="gradient-custom">
-    <div class="container py-5 h-100 w-100">
+<?php require_once APPROOT . '/views/header.php'; ?>
+
+<body class="">
+<div class="container-fluid gradient p-4">
+    <div class="container">
 
         <!-- ADD FORM POP UP  -->
         <!-- Button trigger modal -->
@@ -96,7 +100,7 @@
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="id_arrivalDate">Arrival Date</label>
-                                    <input type="datetime-local" id="id_arrivalDate" name="id_arrivalDate"class="form-control" />
+                                    <input type="datetime-local" id="id_arrivalDate" name="id_arrivalDate" class="form-control" />
 
                                 </div>
 
@@ -139,10 +143,10 @@
 
                                 </div>
                                 <!-- Submit button -->
-                                <div class="form-outline d-flex flex-row justify-content-end">          
+                                <div class="form-outline d-flex flex-row justify-content-end">
                                     <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" name="saveflight" class="btn btn-success btn-block mx-1">SAVE FLIGHT</button>
-                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -171,12 +175,12 @@
                     <?php foreach ($data['flights'] as $flight) { ?>
                         <tr id="<?php echo $flight->volID; ?>">
                             <!-- <th scope="row"><input style="color:white;" type="checkbox" id="" name="" value=""></th>                           -->
-                            <td><?= $flight->departureAdress; ?></td>
-                            <td><?= $flight->destinationAdress; ?></td>
+                            <td><?= $flight->departAirport; ?></td>
+                            <td><?= $flight->destAirport; ?></td>
                             <td><?= $flight->departureDate; ?></td>
                             <td><?= $flight->arrivalDate; ?></td>
                             <td><?= $flight->availableSeats; ?></td>
-                            <td><?= $flight->plane; ?></td>
+                            <td><?= $flight->model; ?></td>
                             <td><?= $flight->price; ?>DH</td>
                             <td>
                                 <div class="d-flex flex-row justify-content-evenly">
@@ -196,7 +200,9 @@
             </table>
         </section>
 
-
+    </div>
+</div>
 </body>
 
+<?php require_once APPROOT . '/views/footer.php' ?>
 </html>

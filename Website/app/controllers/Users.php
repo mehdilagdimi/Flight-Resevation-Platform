@@ -50,6 +50,12 @@
             //
         }
 
+        public function deletePassenger(){
+            if (isset($_POST['cancel'])){
+                $id = $_POST['id_reserv'];
+                $this->userModel->deletePassenger($id);
+            }
+        }
         public function signup(){
             // echo 'hazma';
             session_start();

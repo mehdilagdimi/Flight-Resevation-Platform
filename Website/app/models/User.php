@@ -25,6 +25,8 @@
             $this->table = 'users';
             return $results;
         }
+
+    
         public function addPassenger($userID, $volID, $fName, $lName, $birthDate){
             $this->table = 'passengers';
             $this->db->query("INSERT INTO $this->table (userID, volID, fName, lName, birthDate) VALUES ('$userID', '$volID', '$fName', '$lName', '$birthDate') ");      
@@ -52,6 +54,13 @@
         public function deleteUser($userID){
             $this->db->query("DELETE FROM $this->table WHERE userID='$userID'");
             $this->db->execute();
+        }
+        public function deletePassenger($id){
+            $this->table = 'passengers';
+            $this->db->query("DELETE FROM $this->table WHERE userID='$id'");
+            $this->db->execute();
+            $this->table = 'users';
+
         }
     }
 ?> 
