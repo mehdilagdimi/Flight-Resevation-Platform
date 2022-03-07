@@ -17,8 +17,8 @@
     Class Flights extends Planes{
         public function __construct(){
             $this->flightModel = $this->model('Flight');
-            $this->planeModel = $this->model('Plane');
-            $this->airportModel = $this->model('Airport');
+            // $this->planeModel = $this->model('Plane');
+            // $this->airportModel = $this->model('Airport');
         }
 
         //default method is index and calling the one we need
@@ -32,10 +32,16 @@
                 if($_SESSION['loggedIn'] == true){
                     // $this->setReadableData();
                     if($_SESSION['privilege'] == 'admin'){
-                        $this->view('dashboard/index');
+
+                        $data = $this->showAllFlights();
+                        $this->view('dashboard/index', $data);
+
                     } else {
-                        $this->view('pages/index');
+
+                        header("location:" . URLROOT . "airports/showAirports");
+                        // $this->view('pages/index');
                     }
+
                 } else {
                     header("location:" . URLROOT . "logins");
                 }
@@ -43,6 +49,10 @@
                 header("location:" . URLROOT . "logins");
             }
         }
+
+        // public function getAirports(){
+
+        // }
 
         public function showFlights(){
             //Display flights
@@ -52,15 +62,24 @@
                
                 $departure = $_POST['departure'];
                 $destination = $_POST['destination'];
+                // $departDate = $_POST['date'];
                 // $flights = $this->setReadableData();
                 $constraints = [
                     'departAirport' => $departure,
                     'destAirport'  => $destination
+    
                 ];
-                $Gflights = $this->flightModel->getSpecificMultiple( $constraints);
+               
+                $Gflights = $this->flightModel->getSpecificFlights($constraints);
 
                 if(isset($_POST['roundTrip'])){
-                    $Cflights = $this->flightModel->getCflights();  //get coming flights from the destination specified
+                    $constraints = [ //look for returning flights from the same destination
+                        'departAirport' => $destination, 
+                        'destAirport'  => $departure
+
+                    ];
+                   
+                    $Cflights = $this->flightModel->getSpecificMultiple($constraints);  //get coming flights from the destination specified
                     $data = [
                         'Session user' => ucwords($_SESSION['privilege']),
                         // 'user'  => $checkUser,
@@ -74,19 +93,35 @@
                     'Session user' => ucwords($_SESSION['privilege']),
                     // 'user'  => $checkUser,
                     'roundTrip' => false,
-                    'Gflights' => $Gflights  //going flights only
+                    'Goingflights' => $Gflights  //going flights only
                     ];
                 }
-                           
+                // echo "test";
             // $this->view('pages/index', $data);
-                if($_SESSION['privilege'] == 'admin'){
-                    $this->view('dashboard/flights', $data);
-                } else {
-                    $this->view('pages/flights', $data);
-                }
+                // if($_SESSION['privilege'] == 'admin'){
+                //     $this->view('dashboard/flights', $data);
+                // } else {
+                //     $this->view('pages/flights', $data);
+                // }
+                $this->view('pages/flights', $data);
+                // return $data;
             }
+
         }
 
+        public function showAllFlights(){
+            if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true ){
+                $flights = $this->flightModel->getFlights();
+
+                $data = [
+                    'Session user' => ucwords($_SESSION['privilege']),
+                    // 'user'  => $checkUser
+                    'flights' => $flights  //going flights only
+                    ];
+                
+                return $data;
+            }
+        }
 
         // public function setReadableData(){
 

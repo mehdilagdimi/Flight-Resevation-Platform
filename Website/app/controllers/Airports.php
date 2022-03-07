@@ -22,17 +22,29 @@
             // }
           
         }
+        
+        // public function getAirports(){
+
+        // }
 
         public function showAirports(){
             //display planes
             $airports = $this->airportModel->getAirports();
             $data = [
-                'title' => "List of planes",
+                'title' => "List of airports",
                 'airports' => $airports
             ];
 
-            $this->view('dashboard/showAirports', $data); 
-        }
+            if(isset($_SESSION['loggedIn'])){
+                if($_SESSION['privilege'] == 'admin'){
+                    $this->view('dashboard/showAirports', $data); 
+                } else {
+                    $this->view('pages/index', $data);
+                    // return $data;
+                }
+             }
+            }
+         
 
         public function deleteAirport(){
             if (isset($_POST['delete'])){

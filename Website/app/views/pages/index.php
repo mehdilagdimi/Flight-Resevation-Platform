@@ -40,9 +40,13 @@
                         <label class="form-label" for="form11Example1">Departure</label>
                         <select class="form-select" name ="departure" aria-label="Default select example">
                             <option selected></option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+
+                            <?php foreach($data['airports'] as $airport) { ?>
+                            <option value="<?= $airport->airportAdress ?>"> <?= $airport->airportAdress ?> </option>
+                            <!-- <option value="2">Two</option>
+                            <option value="3">Three</option> -->
+                            <?php } ?>
+
                         </select>
                     </div>
                 </div>
@@ -57,10 +61,15 @@
                         <!-- <input type="text" id="form11Example3" class="form-control" /> -->
                         <label class="form-label" for="form11Example3">Destination</label>
                         <select class="form-select" name="destination" aria-label="Default select example">
+
                             <option selected></option>
-                            <option value="1">One</option>
+                            <?php foreach($data['airports'] as $airport) { ?>
+                            <option value="<?= $airport->airportAdress ?>"> <?= $airport->airportAdress ?> </option>
+                            <!-- <option value="1">One</option>
                             <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="3">Three</option> -->
+                            <?php } ?>
+
                         </select>
                     </div>
                 </div>

@@ -38,7 +38,7 @@
                 $numOfConstraints--;
                 $query .= "$col = '$c'";
                 if($numOfConstraints > 0){
-                    $query += " AND ";
+                    $query .= " AND ";
                 }
             }
             $this->db->query($query);

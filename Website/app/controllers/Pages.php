@@ -20,7 +20,7 @@
                         // $this->view('pages/index', $data);
                         // $flightsController = new Flights;
                         // $flightsController->setReadableData();
-                        header("location:" . URLROOT . "flights/setReadableData");
+                        header("location:" . URLROOT . "flights/index");
                         // $this->view('dashboard/index', $data);
                         // header ("location : ./../../dashboard/index.php");
                     // } else if ($_SESSION['privilege'] == 'user'){

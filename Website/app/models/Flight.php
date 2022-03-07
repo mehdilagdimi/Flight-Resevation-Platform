@@ -11,7 +11,15 @@
 
         public function getFlights(){
             $this->table = 'flights';
-            return $this->getTable();
+            $results = $this->getTable();
+            $this->table = 'vols';
+            return $results;
+        }
+        public function getSpecificFlights($constraints){
+            $this->table = 'flights';
+            $Gflights = $this->getSpecificMultiple($constraints);
+            $this->table = 'vols';
+            return $Gflights;
         }
 
         // public function getFlight(){
@@ -27,6 +35,7 @@
             $this->db->query("UPDATE $this->table SET planeID='$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price' WHERE volID='$volID'");
             $this->db->execute();
         }
+
         public function updateSeatNum($volID, $newAvailableSeats){
             $this->db->query("UPDATE $this->table SET planeID=planeID, departureDate=departureDate, arrivalDate=arrivalDate, availableSeats='$newAvailableSeats', price=price WHERE volID='$volID'");
             $this->db->execute();
