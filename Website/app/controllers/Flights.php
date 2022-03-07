@@ -18,7 +18,7 @@
         public function __construct(){
             $this->flightModel = $this->model('Flight');
             // $this->planeModel = $this->model('Plane');
-            // $this->airportModel = $this->model('Airport');
+            $this->airportModel = $this->model('Airport');
         }
 
         //default method is index and calling the one we need
@@ -113,11 +113,15 @@
         public function showAllFlights(){
             if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true ){
                 $flights = $this->flightModel->getFlights();
-
+                $planes = $this->flightModel->getPlanes();
+                $airports = $this->airportModel->getAirports();
+                // var_dump( $planes );
                 $data = [
                     'Session user' => ucwords($_SESSION['privilege']),
                     // 'user'  => $checkUser
-                    'flights' => $flights  //going flights only
+                    'flights' => $flights,  //going flights only
+                    'planes' => $planes,
+                    'airports' => $airports
                     ];
                 
                 return $data;

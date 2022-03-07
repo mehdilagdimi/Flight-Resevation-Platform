@@ -15,6 +15,7 @@
             $this->table = 'vols';
             return $results;
         }
+
         public function getSpecificFlights($constraints){
             $this->table = 'flights';
             $Gflights = $this->getSpecificMultiple($constraints);

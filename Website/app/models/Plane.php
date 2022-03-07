@@ -6,6 +6,7 @@
         }
 
         public function getPlanes(){
+            $this->table = 'planes';
             return $this->getTable();
         }
         public function getPlaneID($plane){

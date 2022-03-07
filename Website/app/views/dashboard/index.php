@@ -66,9 +66,11 @@
 
         <!-- ADD FORM POP UP  -->
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             ADD FLIGHT
         </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -84,8 +86,17 @@
                             <div class="row mb-4">
 
                                 <div class="form-outline mb-4">
+
                                     <label class="form-label" for="id_plane"">Plane Model</label>
-                                    <input type=" text" id="id_plane" name="plane" class="form-control" />
+                                    <!-- <input type=" text" id="id_plane" name="plane" class="form-control" /> -->
+                                    <select class="form-select" name ="id_plane" aria-label="Default select example">
+                                    <option selected></option>
+
+                                    <?php foreach($data['planes'] as $plane) { ?>
+                                    <option value="<?= $plane->model ?>" > <?= $plane->model ?> </option>
+                                    <?php } ?>
+
+                                    </select>
 
                                 </div>
 
@@ -109,13 +120,19 @@
                                 <div class="col">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_airport">From</label>
-                                        <input type="text" id="id_airportFROM" name="id_airportFROM" class="form-control" />
+                                        <!-- <input type="text" id="id_airportFROM" name="id_airportFROM" class="form-control" /> -->
+                                        <select class="form-select" name ="id_airportFROM" aria-label="Default select example">
+                                        <option selected></option>
+                                        <?php foreach($data['airports'] as $airport) { ?>
+                                        <option value="<?= $airport->airportAdress ?>"> <?= $airport->airportAdress ?> </option>
+                                        <?php } ?>
+                                        </select>
 
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_seats">Available Seats</label>
-                                        <input type="number" id="id_seats" name="id_seats" class="form-control" />
+                                        <input type="number" id="id_seats" name="id_seats" class="form-control" value="<?= $data['planes'][0]->seats ?>"/>
 
                                     </div>
 
@@ -125,23 +142,24 @@
                                 <div class="col">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="id_airportTo">To</label>
-                                        <input type="text" id="id_airportTO" name="id_airportTO" class="form-control" />
+                                        <!-- <input type="text" id="id_airportTO" name="id_airportTO" class="form-control" /> -->
+                                        <select class="form-select" name ="id_airportTO" aria-label="Default select example">
+                                        <option selected></option>
+                                        <?php foreach($data['airports'] as $airport) { ?>
+                                        <option value="<?= $airport->airportAdress ?>"> <?= $airport->airportAdress ?> </option>
+                                        <?php } ?>
+                                        </select>
 
                                     </div>
-
-                                    <!-- Text input -->
+                                    
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="id_state">Going/Coming</label>
-                                        <input type="text" id="id_state" name="id_state" class="form-control" />
-
-                                    </div>
-                                </div>
-                                <!-- Message input -->
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="id_price">Price</label>
+                                    <label class="form-label" for="id_price">Price (DH)</label>
                                     <input type="number" step="0.01" min=0 id="id_price" name="id_price" class="form-control" />
 
                                 </div>
+                                    <!-- Text input -->
+                                </div>
+
                                 <!-- Submit button -->
                                 <div class="form-outline d-flex flex-row justify-content-end">
                                     <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
@@ -156,7 +174,7 @@
         </div>
 
         <!-- Flights table -->
-        <section class="vh-100">
+        <section class="my-4">
             <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
