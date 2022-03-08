@@ -215,9 +215,18 @@
          }
 
          public function updateFlight(){
-            if (isset($_POST['delete'])){
-                $id = $_POST['id_vol'];
-                $this->flightModel->deleteFlight($id);
+            if (isset($_POST['updateFlight'])){
+
+                $id = $_POST['volID'];
+                $planeID = $_POST['id_plane'];
+                $departDate = $_POST['id_departDate'];
+                $departAirportID = $_POST['id_airportFROM'];
+                $destAirportID = $_POST['id_airportFROM'];
+                $arrivalDate = $_POST['id_arrivalDate'];
+                $availableSeats = $_POST['id_seats'];
+                $price = $_POST['id_price'];
+
+                $this->flightModel->updateFlight($id, $planeID, $departDate, $departAirportID, $destAirportID, $arrivalDate, $availableSeats, $price);
             }
             header("location:" . URLROOT ."flights/index");
          }

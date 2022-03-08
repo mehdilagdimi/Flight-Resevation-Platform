@@ -24,7 +24,7 @@ ON f.volID= t.volID
 
 //flights tables
 CREATE VIEW flights AS 
-SELECT v.volID, v.departureDate, t.departAirport, t.destAirport, v.arrivalDate, p.model, v.availableSeats, v.price
+SELECT v.volID, v.departureDate, t.departAirport, t.destAirport, v.arrivalDate, p.planeID, p.model, v.availableSeats, v.price
 FROM vols v
 INNER JOIN 
 flightsfromto t

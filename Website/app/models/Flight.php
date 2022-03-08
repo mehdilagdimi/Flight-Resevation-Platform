@@ -32,9 +32,13 @@
             $this->db->execute();
         }
 
-        public function updateFlight($volID, $planeID, $departureDate, $arrivalDate, $availableSeats, $price){
+        public function updateFlight($volID, $planeID, $departureDate, $departAirportID, $destAirportID, $arrivalDate, $availableSeats, $price){
+            // $this->table = 'flights';
             $this->db->query("UPDATE $this->table SET planeID='$planeID', departureDate='$departureDate', arrivalDate='$arrivalDate', availableSeats='$availableSeats', price='$price' WHERE volID='$volID'");
             $this->db->execute();
+            $this->updateDeparture($departAirportID, $volID);
+            $this->updateDestination($destAirportID, $volID);
+            $this->table = 'vols';
         }
 
         public function updateSeatNum($volID, $newAvailableSeats){
@@ -56,6 +60,19 @@
             $this->db->execute();
             $this->table = 'vols';
             // return $result;
+        }
+
+        public function updateDeparture($airportID, $volID){
+            $this->table = 'departures';
+            $this->db->query("UPDATE $this->table SET airportID = '$airportID' WHERE volID='$volID'");
+            $this->db->execute();
+            // $this->table = 'vols';
+        }
+        public function updateDestination($airportID, $volID){
+            $this->table = 'destinations';
+            $this->db->query("UPDATE $this->table SET airportID = '$airportID' WHERE volID='$volID'");
+            $this->db->execute();
+            // $this->table = 'vols';
         }
 
         public function addDestination($volID, $airportID){

@@ -202,11 +202,12 @@
         // let reserve = document.querySelectorAll('.reserve');
         let resr = document.querySelectorAll('.reserve');
         resr.forEach(function(resr) {
+            console.log(resr.volID);
             resr.addEventListener('click', setVolID, false);
             resr.volID = resr.value;
             // console.log(resr.volID);
             // console.log(resr.value);
-        })
+        });
 
 
         function setVolID(evt) {

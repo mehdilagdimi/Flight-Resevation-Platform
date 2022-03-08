@@ -16,7 +16,7 @@
     <?php require_once APPROOT . '/views/header.php'; ?>
     <div class="container-fluid gradient p-2">
         <div class="container">
-            <table class="table table-dark text-center my-4">
+            <table class="table table-dark table-hover text-center my-4">
                 <thead>
                     <tr>
                         <!-- <th scope="col">#</th> -->
