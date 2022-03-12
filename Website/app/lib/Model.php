@@ -54,6 +54,11 @@
             return $maxID;
         }
 
+        public function delete($id, $val){
+            $this->db->query("DELETE FROM $this->table WHERE $id = '$val'");
+            $this->db->execute();
+        }
+
         // public function addRecord($constraints_arr){
         //     $this->db->query("INSERT INTO ")
         // }

@@ -63,28 +63,49 @@
             // echo $_SESSION["privilege"]; 
             if(isset($_SESSION["privilege"]) && isset($_POST['addReservation']) ){
                 if($_SESSION["privilege"] == 'user'){
-                    $volID = $_POST['volID'];
+
+                    if($_POST['type'] == 'roundTrip'){
+                        // if($_SESSION['roundTrip'] == 'going'){
+                            $roundT = $_SESSION['roundTrip'] = true;
+                        // }
+                    } else {
+                        $_SESSION['roundTrip'] = false;
+                    }  
+                   
                     //verify availabel seats
                     $flight = $this->flightModel->getSpecific('volID', $volID);
+                    $availableSeats[0] = $flight[0]->availableSeats;
+                    $volID = $_POST['volID'];
+                   
+
+                    if($roundT){
+                        $volIDReturn = $_POST['volIDReturn'];
+                        $flightReturn = $this->flightModel->getSpecific('volID', $volIDReturn);
+                        $availableSeats[1] = $flightReturn[0]->availableSeats;
+                    }
+
+
                     $numOfReserv = 1; //default is one, otherwise it is dependant on how many reservation the user wants to book
                     // echo $flight[0]->availableSeats;
-                    $availableSeats = $flight[0]->availableSeats;
-                    if($availableSeats < $numOfReserv){
-                        if($availableSeats == 0){
-                            echo "No seat is available on this flight. Choose another one";
-                            $_POST = [];
-                            return;
+                    foreach($availableSeats as $s){
+                        if($s < $numOfReserv){
+                            if($s == 0){
+                                echo "No seat is available on this flight. Choose another one";
+                                $_POST = [];
+                                return;
+                            }
+                            else {
+                                // echo "Only $s seats are available on this flight. $s reservations will be created";
+                                return; 
+                            }
                         }
-                        else {
-                            echo "Only $availableSeats seats are available on this flight. $availableSeats reservations will be created"; 
-                        }
-    
                     }
+                    
                     // echo "hello";
                     // echo $volID;
                     for($i = 0; $i <  $numOfReserv; $i++){
                             $userID = $_SESSION['userID']; // set this when logging in => change logins controller
-                            $volID = $_POST['volID'];
+                            // $volID = $_POST['volID'];
                             $fName = $_POST['fName'];
                             $lName =  $_POST['lName'];
                             $birthDate = $_POST['birthDate'];
@@ -93,23 +114,26 @@
                             $goingComing = 'going';
                             // echo "testing going coming POST" . $_POST['goingComing'];
 
-                            if($_POST['type'] == 'roundTrip'){
-                                // if($_SESSION['roundTrip'] == 'going'){
-                                    $_SESSION['roundTrip'] = true;
-                                // }
-                            } else {
-                                $_SESSION['roundTrip'] = false;
-                            }                
+                            // if($_POST['type'] == 'roundTrip'){
+                            //     // if($_SESSION['roundTrip'] == 'going'){
+                            //         $_SESSION['roundTrip'] = true;
+                            //     // }
+                            // } else {
+                            //     $_SESSION['roundTrip'] = false;
+                            // }                
                             
-                            $this->flightModel->updateSeatNum($volID, $availableSeats - 1);
-
+                            $this->flightModel->updateSeatNum($volID, $availableSeats[0] - 1);
                             $passengerID = $this->userModel->addPassenger($userID, $volID, $fName, $lName, $birthDate);
-                            // echo 'inside addflight in FLights contro';
-                            
+                            // echo 'inside addflight in FLights contro';   
                             // echo "plane  $planeModel";
-                            
-                            $this->reservModel->addReservation($passengerID, $goingComing, $seatNum);           
-
+                            $this->reservModel->addReservation($passengerID, $goingComing, $seatNum); 
+                            if($roundT){
+                                $goingComing = 'coming'; 
+                                $this->flightModel->updateSeatNum($volIDReturn, $availableSeats[1] - 1);
+                                $this->reservModel->addReservation($passengerID, $goingComing, $seatNum);
+                                // $passengerIDRet = $this->userModel->addPassenger($userID, $volIDReturn, $fName, $lName, $birthDate);
+                            }
+                                      
                     }
                         // $airportID = $this->airportModel->getAirportID($airportTO);
                         // $this->flightModel->addDestination($volID, $airportID);

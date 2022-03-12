@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2022 at 12:51 PM
+-- Generation Time: Mar 11, 2022 at 12:01 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -84,9 +84,10 @@ CREATE TABLE `departures` (
 
 INSERT INTO `departures` (`volID`, `airportID`) VALUES
 (2, 2),
-(3, 2),
 (31, 2),
-(32, 2);
+(33, 1),
+(34, 1),
+(35, 1);
 
 -- --------------------------------------------------------
 
@@ -104,10 +105,11 @@ CREATE TABLE `destinations` (
 --
 
 INSERT INTO `destinations` (`volID`, `airportID`) VALUES
-(2, 1),
-(3, 2),
+(2, 2),
 (31, 3),
-(32, 3);
+(33, 2),
+(34, 3),
+(35, 2);
 
 -- --------------------------------------------------------
 
@@ -121,6 +123,7 @@ CREATE TABLE `flights` (
 ,`departAirport` varchar(100)
 ,`destAirport` varchar(100)
 ,`arrivalDate` timestamp
+,`planeID` int(11)
 ,`model` varchar(50)
 ,`availableSeats` int(11)
 ,`price` float
@@ -180,11 +183,7 @@ CREATE TABLE `passengers` (
 --
 
 INSERT INTO `passengers` (`passengerID`, `userID`, `volID`, `fName`, `lName`, `birthDate`) VALUES
-(1, 1, 1, 'User1', 'User1LASTNAME', '2022-03-02 19:42:47'),
-(2, 2, 2, 'User2', 'User2LASTNAME', '2022-03-02 19:45:51'),
-(20, 1, 1, 'fName6', 'lName6', '2022-03-16 23:00:00'),
-(21, 1, 2, 'fName5', 'lName5', '2022-03-20 23:00:00'),
-(22, 1, 3, 'fName7', 'lName7', '2022-03-16 23:00:00');
+(23, 1, 2, 'fName5', 'lName5', '2022-03-09 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -214,6 +213,7 @@ INSERT INTO `planes` (`planeID`, `model`, `seats`) VALUES
 --
 CREATE TABLE `reservations` (
 `reservID` int(11)
+,`passengerID` int(11)
 ,`fName` varchar(50)
 ,`lName` varchar(50)
 ,`departureDate` timestamp
@@ -245,11 +245,7 @@ CREATE TABLE `reservs` (
 --
 
 INSERT INTO `reservs` (`reservID`, `passengerID`, `dateReserv`, `goingComing`, `seatNum`) VALUES
-(1, 2, '2022-02-21 18:01:56', 'Going', 4),
-(2, 1, '2022-02-21 18:01:56', 'Going', 6),
-(9, 20, '2022-03-04 22:36:12', 'going', 86),
-(10, 21, '2022-03-04 22:38:35', 'going', 6),
-(11, 22, '2022-03-04 23:12:24', 'going', 56);
+(12, 23, '2022-03-07 10:34:05', 'going', 78);
 
 -- --------------------------------------------------------
 
@@ -296,10 +292,11 @@ CREATE TABLE `vols` (
 --
 
 INSERT INTO `vols` (`volID`, `planeID`, `departureDate`, `arrivalDate`, `availableSeats`, `price`, `createdAt`) VALUES
-(2, 2, '2022-02-20 18:55:52', '2022-02-23 18:54:50', 132, 468.7, '2022-02-20 18:55:52'),
-(3, 1, '2022-02-25 18:55:52', '2022-02-26 18:54:50', 699, 500, '2022-02-20 18:55:52'),
+(2, 2, '2022-03-30 03:58:00', '2022-03-31 02:00:00', 139, 400.7, '2022-02-20 18:55:52'),
 (31, 1, '2022-02-25 21:34:00', '2022-02-26 21:33:00', 567, 787, '2022-02-25 16:29:22'),
-(32, 1, '2022-03-12 16:50:00', '2022-03-19 16:51:00', 3, 12, '2022-03-05 16:51:18');
+(33, 1, '2022-03-14 10:28:00', '2022-03-23 10:28:00', 700, 554, '2022-03-07 10:29:26'),
+(34, 2, '2022-03-23 13:15:00', '2022-03-10 13:15:00', 132, 786, '2022-03-07 13:16:10'),
+(35, 2, '2022-03-03 13:16:00', '2022-03-17 17:16:00', 139, 564, '2022-03-07 13:16:48');
 
 -- --------------------------------------------------------
 
@@ -308,7 +305,7 @@ INSERT INTO `vols` (`volID`, `planeID`, `departureDate`, `arrivalDate`, `availab
 --
 DROP TABLE IF EXISTS `flights`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `flights`  AS SELECT `v`.`volID` AS `volID`, `v`.`departureDate` AS `departureDate`, `t`.`departAirport` AS `departAirport`, `t`.`destAirport` AS `destAirport`, `v`.`arrivalDate` AS `arrivalDate`, `p`.`model` AS `model`, `v`.`availableSeats` AS `availableSeats`, `v`.`price` AS `price` FROM ((`vols` `v` join `flightsfromto` `t` on(`v`.`volID` = `t`.`volID`)) join `planes` `p` on(`v`.`planeID` = `p`.`planeID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `flights`  AS SELECT `v`.`volID` AS `volID`, `v`.`departureDate` AS `departureDate`, `t`.`departAirport` AS `departAirport`, `t`.`destAirport` AS `destAirport`, `v`.`arrivalDate` AS `arrivalDate`, `p`.`planeID` AS `planeID`, `p`.`model` AS `model`, `v`.`availableSeats` AS `availableSeats`, `v`.`price` AS `price` FROM ((`vols` `v` join `flightsfromto` `t` on(`v`.`volID` = `t`.`volID`)) join `planes` `p` on(`v`.`planeID` = `p`.`planeID`)) ;
 
 -- --------------------------------------------------------
 
@@ -344,7 +341,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `reservations`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reservations`  AS SELECT `r`.`reservID` AS `reservID`, `p`.`fName` AS `fName`, `p`.`lName` AS `lName`, `f`.`departureDate` AS `departureDate`, `f`.`departAirport` AS `departAirport`, `f`.`destAirport` AS `destAirport`, `f`.`arrivalDate` AS `arrivalDate`, `r`.`dateReserv` AS `dateReserv`, `r`.`seatNum` AS `seatNum`, `f`.`price` AS `price`, `r`.`goingComing` AS `goingComing` FROM ((`reservs` `r` join `passengers` `p` on(`r`.`passengerID` = `p`.`passengerID`)) join `flights` `f` on(`f`.`volID` = `p`.`volID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reservations`  AS SELECT `r`.`reservID` AS `reservID`, `p`.`passengerID` AS `passengerID`, `p`.`fName` AS `fName`, `p`.`lName` AS `lName`, `f`.`departureDate` AS `departureDate`, `f`.`departAirport` AS `departAirport`, `f`.`destAirport` AS `destAirport`, `f`.`arrivalDate` AS `arrivalDate`, `r`.`dateReserv` AS `dateReserv`, `r`.`seatNum` AS `seatNum`, `f`.`price` AS `price`, `r`.`goingComing` AS `goingComing` FROM ((`reservs` `r` join `passengers` `p` on(`r`.`passengerID` = `p`.`passengerID`)) join `flights` `f` on(`f`.`volID` = `p`.`volID`)) ;
 
 --
 -- Indexes for dumped tables
@@ -429,7 +426,7 @@ ALTER TABLE `airports`
 -- AUTO_INCREMENT for table `passengers`
 --
 ALTER TABLE `passengers`
-  MODIFY `passengerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `passengerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `planes`
@@ -441,7 +438,7 @@ ALTER TABLE `planes`
 -- AUTO_INCREMENT for table `reservs`
 --
 ALTER TABLE `reservs`
-  MODIFY `reservID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `reservID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -453,7 +450,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vols`
 --
 ALTER TABLE `vols`
-  MODIFY `volID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `volID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables

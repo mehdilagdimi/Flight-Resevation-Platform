@@ -15,5 +15,17 @@
                 die("View does not exists");
             }
         }
+
+        public function checkSessionLogin(){
+            if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true ) {
+                return true;
+            } else { return false;}
+        }
+
+        public function checkSessionAdmin(){
+            if($_SESSION['privilege'] == 'admin'){
+                return true;
+            } else { return false;}
+        }
     }
 ?>

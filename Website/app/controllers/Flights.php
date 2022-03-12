@@ -102,10 +102,11 @@
                 // if($_SESSION['privilege'] == 'admin'){
                 //     $this->view('dashboard/flights', $data);
                 // } else {
-                //     $this->view('pages/flights', $data);
+                    $this->view('pages/flights', $data);
                 // }
-                $this->view('pages/flights', $data);
+                // $this->view('pages/flights', $data);
                 // return $data;
+                
             }
 
         }
@@ -123,7 +124,7 @@
                     'planes' => $planes,
                     'airports' => $airports
                     ];
-                
+                // echo json_encode($data);
                 return $data;
             }
         }
@@ -221,7 +222,7 @@
                 $planeID = $_POST['id_plane'];
                 $departDate = $_POST['id_departDate'];
                 $departAirportID = $_POST['id_airportFROM'];
-                $destAirportID = $_POST['id_airportFROM'];
+                $destAirportID = $_POST['id_airportTO'];
                 $arrivalDate = $_POST['id_arrivalDate'];
                 $availableSeats = $_POST['id_seats'];
                 $price = $_POST['id_price'];

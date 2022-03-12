@@ -67,7 +67,8 @@
                             <!-- Submit button -->
                             <div class="form-outline d-flex flex-row justify-content-end">
                                 <input type="hidden" class="volID" name="volID" value="">
-                                <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+                                <input type="hidden" class="volIDReturn" name="volIDReturn" value="">
+                                <button type="button" class="btn btn-secondary mx-1 close" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" name="addReservation" class="btn btn-success btn-block mx-1">ADD RESERVATION</button>
                             </div>
                         </div>
@@ -112,7 +113,8 @@
                                     <!-- ADD RESERVATION POP UP  -->
                                     <!-- Button trigger modal -->
                                     <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
-                                    <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
+                                    <!-- <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button> -->
+                                    <button type="button" class="btn btn-success reserve"  name="reserve" value="<?= $flight->volID ?>" >RESERVE</button>
                                     <!-- Modal -->
                                     <!-- add a button for cancelling reservation -->
                                     <!-- <form class="" action="" method="POST">
@@ -165,7 +167,7 @@
                                     <!-- ADD RESERVATION POP UP  -->
                                     <!-- Button trigger modal -->
                                     <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
-                                    <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
+                                    <button type="button" class="btn btn-success reserveReturn" name="reserveReturn" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button>
                                     <!-- Modal -->
                                     <!-- add a button for cancelling reservation -->
                                     <!-- <form class="" action="" method="POST">
@@ -201,18 +203,76 @@
 
         // let reserve = document.querySelectorAll('.reserve');
         let resr = document.querySelectorAll('.reserve');
+        let resrReturn = document.querySelectorAll('.reserveReturn');
+        let cancelRes = document.querySelector('.close');
+        let currentReservButtonA, currentReservButtonB;
+        
+        //for going reservation
         resr.forEach(function(resr) {
-            console.log(resr.volID);
-            resr.addEventListener('click', setVolID, false);
+            // console.log(resr.volID);
             resr.volID = resr.value;
+            resr.addEventListener('click', setVolID, false);
+            // resr.volID = resr.value;
             // console.log(resr.volID);
             // console.log(resr.value);
+            // console.log(resr.name);
+        });
+        
+        // const flights = {}; // an object
+
+        //for coming reservation
+        resrReturn.forEach(function(resr) {
+            // console.log(resr.volID);
+            resr.volID = resr.value;
+            resr.addEventListener('click', setVolID, false);
+            // resr.volID = resr.value;
+            // console.log(resr.volID);
+            // console.log(resr.value);
+            // console.log(resr.name);
         });
 
+        cancelRes.addEventListener("click", setVolID, false);
 
         function setVolID(evt) {
             // console.log(document.querySelector('.volID').name);
-            document.querySelector('.volID').value = evt.currentTarget.volID;
+
+            if(evt.currentTarget.name == 'reserve'){
+                if(typeof(currentReservButtonA) !== 'undefined'){
+                    currentReservButtonA.classList.remove("btn-secondary");
+                    currentReservButtonA.classList.add("btn-success");
+                }
+                currentReservButtonA = evt.currentTarget;  //save the clicked/activated reserve button
+
+                document.querySelector('.volID').value = evt.currentTarget.volID;
+                evt.currentTarget.classList.remove("btn-success");
+                evt.currentTarget.classList.toggle("btn-secondary");
+
+                if(!evt.currentTarget.classList.contains("btn-secondary")){
+                    evt.currentTarget.classList.add("btn-success");
+                } 
+
+            } else if(evt.currentTarget.name == 'reserveReturn'){
+
+                if(typeof(currentReservButtonB) !== 'undefined'){
+                    currentReservButtonB.classList.remove("btn-secondary");
+                    currentReservButtonB.classList.add("btn-success");
+                }
+                currentReservButtonB = evt.currentTarget;  //save the clicked/activated reserve button
+                
+                document.querySelector('.volIDReturn').value = evt.currentTarget.volID;
+           
+                evt.currentTarget.classList.remove("btn-success");
+                evt.currentTarget.classList.toggle("btn-secondary");
+                if(!evt.currentTarget.classList.contains("btn-secondary")){
+                    evt.currentTarget.classList.add("btn-success");
+                }
+
+            } else if (evt.currentTarget.classList.contains('close')){
+                    currentReservButtonA.classList.remove("btn-secondary");
+                    currentReservButtonA.classList.add("btn-success");
+                    currentReservButtonB.classList.remove("btn-secondary");
+                    currentReservButtonB.classList.add("btn-success");
+            }
             // console.log(document.querySelector('.volID').value);
         }
 
