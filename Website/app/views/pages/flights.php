@@ -200,14 +200,33 @@
 
         // }
 
-
         // let reserve = document.querySelectorAll('.reserve');
         let resr = document.querySelectorAll('.reserve');
         let resrReturn = document.querySelectorAll('.reserveReturn');
         let cancelRes = document.querySelector('.close');
         let currentReservButtonA, currentReservButtonB;
-        
-        //for going reservation
+
+        let roundT = "<?php echo isset($_POST['roundTrip'])?>";
+
+        // console.log(roundT); 
+        if(!roundT ){
+            console.log(roundT);
+            resr.forEach(function(resr) {
+            // console.log(resr.volID);
+            // console.log(resr.classList.contains("reserve"));
+            resr.setAttribute("data-bs-Toggle", "modal");
+            resr.setAttribute("data-bs-Target", "#staticBackdrop");
+            // resr.dataset.bsToggle = "toggle";
+            // resr.dataset.bsTarget = "#staticBackdrop";
+            // console.log(resr.dataset.bsToggle);
+            // resr.addEventListener('click', setVolID, false);
+            // resr.volID = resr.value;
+            // console.log(resr.volID);
+            // console.log(resr.value);
+            // console.log(resr.name);
+            });
+        }
+        //activate flight row and send flight ID to the popup/form
         resr.forEach(function(resr) {
             // console.log(resr.volID);
             resr.volID = resr.value;
@@ -217,18 +236,10 @@
             // console.log(resr.value);
             // console.log(resr.name);
         });
-        
-        // const flights = {}; // an object
-
-        //for coming reservation
+        //when simple flight is chosed
         resrReturn.forEach(function(resr) {
-            // console.log(resr.volID);
             resr.volID = resr.value;
             resr.addEventListener('click', setVolID, false);
-            // resr.volID = resr.value;
-            // console.log(resr.volID);
-            // console.log(resr.value);
-            // console.log(resr.name);
         });
 
         cancelRes.addEventListener("click", setVolID, false);

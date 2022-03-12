@@ -7,6 +7,8 @@
             $this->flightModel = $this->model('Flight');
         }
 
+        public  $availableSeats = [];
+
         //default
         public function index(){
             // session_start();
@@ -73,9 +75,9 @@
                     }  
                    
                     //verify availabel seats
+                    $volID = $_POST['volID'];
                     $flight = $this->flightModel->getSpecific('volID', $volID);
                     $availableSeats[0] = $flight[0]->availableSeats;
-                    $volID = $_POST['volID'];
                    
 
                     if($roundT){
@@ -130,8 +132,8 @@
                             if($roundT){
                                 $goingComing = 'coming'; 
                                 $this->flightModel->updateSeatNum($volIDReturn, $availableSeats[1] - 1);
-                                $this->reservModel->addReservation($passengerID, $goingComing, $seatNum);
-                                // $passengerIDRet = $this->userModel->addPassenger($userID, $volIDReturn, $fName, $lName, $birthDate);
+                                $passengerIDRet = $this->userModel->addPassenger($userID, $volIDReturn, $fName, $lName, $birthDate);
+                                $this->reservModel->addReservation($passengerIDRet, $goingComing, $seatNum);
                             }
                                       
                     }
