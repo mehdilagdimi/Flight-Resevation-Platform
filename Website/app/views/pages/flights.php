@@ -48,24 +48,30 @@
                                 </div>
 
                                 <!-- Text input -->
-                                <div class="form-outline mb-4">
-                                    <select class="form-select" name="type" aria-label="Default select example">
+                                <!-- <div class="form-outline mb-4">
+                                    <select class="form-select typeFlight" name="type" value="" aria-label="Default select example">
                                         <option selected>Type of Flight</option>
                                         <option value="simpleFlight">Simple Flight</option>
                                         <option value="roundTrip">Round Trip</option>
-                                    </select>
+                                    </select> -->
                                     <!-- <label class="form-label" for="id_state">Going/Coming</label>
                                     <input type="text" id="id_state" name="id_state" class="form-control" /> -->
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <!-- Message input -->
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="seatNum">Seat</label>
-                                <input type="number" id="seatNum" name="seatNum" class="form-control" />
+                                <label class="form-label" for="seatNum">Seat ---></label>
+                                <input type="number" id="seatNumG" name="seatNumG" class="form-control" />
+
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="seatNum">Seat <--- </label>
+                                <input type="number" id="seatNumC" name="seatNumC" class="form-control" />
 
                             </div>
                             <!-- Submit button -->
                             <div class="form-outline d-flex flex-row justify-content-end">
+                                <input type="hidden" class="typeFlight" name="type" value="">
                                 <input type="hidden" class="volID" name="volID" value="">
                                 <input type="hidden" class="volIDReturn" name="volIDReturn" value="">
                                 <button type="button" class="btn btn-secondary mx-1 close" data-bs-dismiss="modal">Close</button>
@@ -114,7 +120,7 @@
                                     <!-- Button trigger modal -->
                                     <!-- <input type="text" name="flightID" hidden data-id="<?= $flight->volID ?>"> -->
                                     <!-- <button type="button" class="btn btn-success reserve" name="reserve" value="<?= $flight->volID ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">RESERVE</button> -->
-                                    <button type="button" class="btn btn-success reserve"  name="reserve" value="<?= $flight->volID ?>" >RESERVE</button>
+                                    <button type="button" class="btn btn-success reserve"  data-bs-toggle="" data-bs-target="" name="reserve" value="<?= $flight->volID ?>" >RESERVE</button>
                                     <!-- Modal -->
                                     <!-- add a button for cancelling reservation -->
                                     <!-- <form class="" action="" method="POST">
@@ -205,6 +211,7 @@
         let resrReturn = document.querySelectorAll('.reserveReturn');
         let cancelRes = document.querySelector('.close');
         let currentReservButtonA, currentReservButtonB;
+        let typeFlight = document.querySelector(".typeFlight");
 
         let roundT = "<?php echo isset($_POST['roundTrip'])?>";
 
@@ -214,10 +221,14 @@
             resr.forEach(function(resr) {
             // console.log(resr.volID);
             // console.log(resr.classList.contains("reserve"));
-            resr.setAttribute("data-bs-Toggle", "modal");
-            resr.setAttribute("data-bs-Target", "#staticBackdrop");
-            // resr.dataset.bsToggle = "toggle";
+            resr.setAttribute("data-bs-toggle", "modal");
+            resr.setAttribute("data-bs-target", "#staticBackdrop");
+
+
+            // resr.dataset.bsToggle = "modal";
             // resr.dataset.bsTarget = "#staticBackdrop";
+
+            typeFlight.value = "simple";
             // console.log(resr.dataset.bsToggle);
             // resr.addEventListener('click', setVolID, false);
             // resr.volID = resr.value;
@@ -225,6 +236,8 @@
             // console.log(resr.value);
             // console.log(resr.name);
             });
+        } else {
+            typeFlight.value = "roundTrip";
         }
         //activate flight row and send flight ID to the popup/form
         resr.forEach(function(resr) {

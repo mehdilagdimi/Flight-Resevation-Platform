@@ -18,6 +18,13 @@
             return $this->getTableOrder($id);
         }
 
+        public function getUserReservs($id, $c){
+            $this->table = 'reservations';
+            $result = $this->getSpecific($id, $c);
+            $this->table = 'reservs';
+            return $result;
+        }
+
         // public function deleteReserv($reservID){
         //     // $reservID = $_POST['id_user'];
         //     $this->db->query("DELETE FROM $this->table WHERE reservID='$reservID'");

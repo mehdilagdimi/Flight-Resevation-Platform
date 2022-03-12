@@ -37,7 +37,7 @@ ON v.planeID = p.planeID
 
 
 CREATE VIEW reservations AS
-SELECT r.reservID, p.passengerID, p.fName, p.lName, f.departureDate, f.departAirport, f.destAirport, f.arrivalDate, r.dateReserv, r.seatNum, f.price, r.goingComing
+SELECT r.reservID, p.userID, p.passengerID, p.fName, p.lName, f.departureDate, f.departAirport, f.destAirport, f.arrivalDate, r.dateReserv, r.seatNum, f.price, r.goingComing
 FROM reservs r
 INNER JOIN 
 passengers p

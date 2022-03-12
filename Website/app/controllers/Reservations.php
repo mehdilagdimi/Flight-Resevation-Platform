@@ -32,19 +32,27 @@
             //display reservations
             // echo 
             // session_start();
-            $reservs = $this->reservModel->getReservs();
-            
-            $data = [
-                'title' => 'List of reservations',
-                'reservations' => $reservs 
-            ];
+        
+            $userID = $_SESSION['userID'];
             //  echo $_SESSION['privilege'];
             if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == TRUE){
                 if($_SESSION['privilege'] == 'admin'){
+                    $reservs = $this->reservModel->getReservs();
+                    $data = [
+                        'title' => 'List of reservations',
+                        'reservations' => $reservs 
+                    ];
+
                     $this->view('dashboard/showReservations', $data);
                     // echo 'test';
                 } else {
                     // echo "user reservations view";
+                    $reservs = $this->reservModel->getUserReservs("userID", $userID);
+                    $data = [
+                        'title' => 'List of reservations',
+                        'reservations' => $reservs 
+                    ];
+                    
                     $this->view('pages/reservations', $data);
                 }
             }
@@ -68,10 +76,12 @@
 
                     if($_POST['type'] == 'roundTrip'){
                         // if($_SESSION['roundTrip'] == 'going'){
-                            $roundT = $_SESSION['roundTrip'] = true;
+                            // $roundT = $_SESSION['roundTrip'] = true;
+                            $roundT = true;
                         // }
                     } else {
-                        $_SESSION['roundTrip'] = false;
+                        // $_SESSION['roundTrip'] = false;
+                        $roundT = false;
                     }  
                    
                     //verify availabel seats
@@ -111,7 +121,7 @@
                             $fName = $_POST['fName'];
                             $lName =  $_POST['lName'];
                             $birthDate = $_POST['birthDate'];
-                            $seatNum = $_POST['seatNum'];
+                            $seatNum = $_POST['seatNumG'];
                             // $goingComing =  $_POST['goingComing'] = 'going'; //default value change it dynamically according to form
                             $goingComing = 'going';
                             // echo "testing going coming POST" . $_POST['goingComing'];
@@ -126,10 +136,10 @@
                             
                             $this->flightModel->updateSeatNum($volID, $availableSeats[0] - 1);
                             $passengerID = $this->userModel->addPassenger($userID, $volID, $fName, $lName, $birthDate);
-                            // echo 'inside addflight in FLights contro';   
-                            // echo "plane  $planeModel";
                             $this->reservModel->addReservation($passengerID, $goingComing, $seatNum); 
+
                             if($roundT){
+                                $seatNum = $_POST['seatNumC'];
                                 $goingComing = 'coming'; 
                                 $this->flightModel->updateSeatNum($volIDReturn, $availableSeats[1] - 1);
                                 $passengerIDRet = $this->userModel->addPassenger($userID, $volIDReturn, $fName, $lName, $birthDate);
