@@ -74,7 +74,7 @@
 
     <!-- Flights going to -->
     <div class="container-fluid gradient p-2">
-        <div class="container">
+        <div class="container table-responsive">
             <h2>----></h2>
             <table class="table table-responsive table-dark table-hover text-center my-4">
                 <thead>

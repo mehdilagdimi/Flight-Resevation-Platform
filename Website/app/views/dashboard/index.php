@@ -276,7 +276,7 @@
             </div>
 
             <!-- Flights table -->
-            <section class="my-4">
+            <section class="my-4 table-responsive">
                 <table class="table table-dark table-hover text-center">
                     <thead>
                         <tr>

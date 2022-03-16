@@ -80,7 +80,7 @@
                     <!-- Grid column -->
 
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <div class="d-flex flex-column">
+                        <div class="d-flex flex-row mt-1 justify-content-center h-100">
                             <a href="" class="me-4 text-reset mb-1">
                                 <i class="fab fa-facebook-f"></i>
                             </a>

@@ -15,8 +15,8 @@
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarCollapse">
-                    <div class="navbar-nav w-100 fs-6 fw-bold d-flex justify-content-end">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+                    <div class="navbar-nav w-100 fs-6 fw-bold justify-content-end">
                         
                         <!-- <a href="./index.html" class="nav-item nav-link">Home</a> -->
                         <a href="<?= URLROOT . 'flights/index' ?>" class="nav-item nav-link text-center text-primary"> <span id="Flights"> BOOK FLIGHT </span></a>
