@@ -5,6 +5,8 @@
             $this->table = 'airports';
         }
 
+        
+
         public function getAirports(){
             return $this->getTable();
         }

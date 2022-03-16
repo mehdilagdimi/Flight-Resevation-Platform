@@ -8,6 +8,13 @@
         //specify which DB table
         // private $email;
         // private $passw;
+        public $id;
+        public $passengerID;
+        protected $phone;
+        protected $email;
+        protected $birthDate;
+        protected $passw;
+
 
         public function __construct(){
             parent::__construct();
@@ -31,10 +38,10 @@
             $this->table = 'passengers';
             $this->db->query("INSERT INTO $this->table (userID, volID, fName, lName, birthDate) VALUES ('$userID', '$volID', '$fName', '$lName', '$birthDate') ");      
             $this->db->execute();
-            $id = 'passengerID';
-            $passengerID = $this->getRecordHighestID($id);
+            $this->id = 'passengerID';
+            $this->passengerID = $this->getRecordHighestID($this->id);
             $this->table = 'users';
-            return $passengerID;
+            return $this->passengerID;
         }
      
         public function addUser($phone, $email, $birthDate, $passw){

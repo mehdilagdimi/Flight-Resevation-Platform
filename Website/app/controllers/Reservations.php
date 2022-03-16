@@ -67,7 +67,16 @@
         // }
 
         public function addReservation(){
-           
+            // echo '<pre>';
+            // print_r($_POST);
+            // echo $_POST['fName'][0];
+            // foreach($_POST['fName'] as $key => $c){
+            //     print_r($key) . " <br>";
+            //     print_r($c);
+            // }
+            // echo count($_POST['fName']);
+            // return;
+       
             // session_start();
             // echo $_POST['plane'];
             // echo $_SESSION["privilege"]; 
@@ -97,7 +106,9 @@
                     }
 
 
-                    $numOfReserv = 1; //default is one, otherwise it is dependant on how many reservation the user wants to book
+                    // $numOfReserv = 1; //default is one, otherwise it is dependant on how many reservation the user wants to book
+                    $numOfReserv = count($_POST['fName']);  //get number of passengers to be added
+
                     // echo $flight[0]->availableSeats;
                     foreach($availableSeats as $s){
                         if($s < $numOfReserv){
@@ -118,10 +129,10 @@
                     for($i = 0; $i <  $numOfReserv; $i++){
                             $userID = $_SESSION['userID']; // set this when logging in => change logins controller
                             // $volID = $_POST['volID'];
-                            $fName = $_POST['fName'];
-                            $lName =  $_POST['lName'];
-                            $birthDate = $_POST['birthDate'];
-                            $seatNum = $_POST['seatNumG'];
+                            $fName = $_POST['fName'][$i];
+                            $lName =  $_POST['lName'][$i];
+                            $birthDate = $_POST['birthDate'][$i];
+                            $seatNum = $_POST['seatNumG'][$i];
                             // $goingComing =  $_POST['goingComing'] = 'going'; //default value change it dynamically according to form
                             $goingComing = 'going';
                             // echo "testing going coming POST" . $_POST['goingComing'];
@@ -139,7 +150,7 @@
                             $this->reservModel->addReservation($passengerID, $goingComing, $seatNum); 
 
                             if($roundT){
-                                $seatNum = $_POST['seatNumC'];
+                                $seatNum = $_POST['seatNumC'][$i];
                                 $goingComing = 'coming'; 
                                 $this->flightModel->updateSeatNum($volIDReturn, $availableSeats[1] - 1);
                                 $passengerIDRet = $this->userModel->addPassenger($userID, $volIDReturn, $fName, $lName, $birthDate);
