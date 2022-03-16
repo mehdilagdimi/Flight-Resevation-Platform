@@ -12,15 +12,18 @@
         
         public function getReservs(){
             // return $this->getTable();
-            $id = 'reservID';
+            // $id = 'reservID';
+            $c = "dateReserv";
             // echo $this->table;
             $this->table = 'reservations';
-            return $this->getTableOrder($id);
+            return $this->getTableOrder($c);
         }
 
         public function getUserReservs($id, $c){
             $this->table = 'reservations';
-            $result = $this->getSpecific($id, $c);
+            $orderBy = "dateReserv";
+            // $this->getTableOrder($id);
+            $result = $this->getSpecific($id, $c, $orderBy);
             $this->table = 'reservs';
             return $result;
         }

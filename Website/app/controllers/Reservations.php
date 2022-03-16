@@ -95,13 +95,13 @@
                    
                     //verify availabel seats
                     $volID = $_POST['volID'];
-                    $flight = $this->flightModel->getSpecific('volID', $volID);
+                    $flight = $this->flightModel->getSpecific('volID', $volID, "volID");
                     $availableSeats[0] = $flight[0]->availableSeats;
                    
 
                     if($roundT){
                         $volIDReturn = $_POST['volIDReturn'];
-                        $flightReturn = $this->flightModel->getSpecific('volID', $volIDReturn);
+                        $flightReturn = $this->flightModel->getSpecific('volID', $volIDReturn, "volID");
                         $availableSeats[1] = $flightReturn[0]->availableSeats;
                     }
 

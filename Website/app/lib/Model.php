@@ -16,16 +16,16 @@
             return $result;
         }
 
-        public function getTableOrder($id){
+        public function getTableOrder($c){
             // $query = "SELECT * FROM " . $table; 
-            $this->db->query("SELECT * FROM " . $this->table . " ORDER BY " . $id);
+            $this->db->query("SELECT * FROM " . $this->table . " ORDER BY " . $c . " DESC");
             // $this->db->query("SELECT * FROM vols");
             $result = $this->db->resultSet();
             return $result;
         }
 
-        public function getSpecific($col, $constraint){
-            $this->db->query("SELECT * FROM $this->table WHERE $col = '$constraint'");
+        public function getSpecific($col, $constraint, $orderBy){
+            $this->db->query("SELECT * FROM $this->table WHERE $col = '$constraint' ORDER BY $orderBy DESC");
             $result = $this->db->resultSet();
             return $result;
         }

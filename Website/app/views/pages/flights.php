@@ -212,7 +212,7 @@
                 <!-- Message input -->
                 <div class="form-outline mb-4">
                     <label class="form-label" for="seatNumG">Seat ---></label>
-                    <input type="number" id="seatNumG" name="seatNumG[]" class="form-control
+                    <input type="number" id="seatNumG" name="seatNumG[]" class="form-control />
                 </div>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="seatNumC">Seat <--- </label>
