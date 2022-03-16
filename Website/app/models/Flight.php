@@ -89,14 +89,14 @@
         // }
         public function getDeparture($volID, $airportID){
             $this->table = 'departures';
-            $result = $this->getSpecific($volID, $airportID);
+            $result = $this->getSpecific($volID, $airportID, "volID");
             $this->table = 'vols';
             return $result;
         }
 
         public function getDestination($volID, $airportID){
             $this->table = 'destinations';
-            $result = $this->getSpecific($volID, $airportID);
+            $result = $this->getSpecific($volID, $airportID, "volID");
             $this->table = 'vols';
             return $result;
         }
