@@ -9,13 +9,15 @@
             // print_r($this->getUrl());
             $url = $this->getUrl();
             //look for first value in controllers folder, ucwords function will capitalize first letter
-            if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')){
-                // echo ucwords($url[0]);
-                //set a new controller
-                $this->currentController = ucwords($url[0]);
-                unset($url[0]);
+            if(isset($url[0])){
+                if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')){
+                    // echo ucwords($url[0]);
+                    //set a new controller
+                    $this->currentController = ucwords($url[0]);
+                    unset($url[0]);
+                }    
             }
-
+          
             //require the controller
             require_once '../app/controllers/' . $this->currentController . '.php';
             $this->currentController = new $this->currentController; 
