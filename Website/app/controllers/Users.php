@@ -51,7 +51,7 @@
         }
 
         public function deletePassenger(){
-            if (isset($_POST['cancel'])){
+            if (isset($_POST['cancel']) || isset($_POST['delete'])){
                 $id = $_POST['id_passenger'];
                 $this->userModel->deletePassenger($id);
             }

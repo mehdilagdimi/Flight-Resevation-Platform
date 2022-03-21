@@ -63,8 +63,8 @@
                                         <input type="text" name="id_vol" hidden value="<?= $reservation->reservID; ?>">
                                         <button class="btn btn-primary mx-2" name="update" style="">DETAILS</button>
                                     </form> -->
-                                    <form class="" action="<?= URLROOT ?>flights/deleteFlight" method="POST">
-                                        <input type="text" name="id_vol" hidden value="<?= $reservation->reservID; ?>">
+                                    <form class="" action="<?= URLROOT ?>users/deletePassenger" method="POST">
+                                        <input type="text" name="id_passenger" hidden value="<?= $reservation->passengerID; ?>">
                                         <button class="btn btn-danger" name="delete">DELETE</button>
                                     </form>
                                 </div>
